@@ -12,16 +12,17 @@
 
 NAME	= lem_in
 
-SRC		=	main.c check.c attack.c
+SRC		= lemin.c parser.c tools.c
 
-OBJ		= $(addprefix src/,$(SRC:.c=.o))
+OBJ		= $(SRC:.c=.o)
 
-CFLAGS	=  -Wall -Wextra -Werror -Iincludes/ -Ilibft/includes/
+CFLAGS	=   -Iincludes/ -Ilibft/includes/
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@gcc $(OBJ) -o $(NAME) -L libft/ -lft -Ilibft/includes/
-	@echo "Filler..."
+	@gcc $(OBJ) -o $(NAME) -L libft/ -lft
+	@echo "Lem-in..."
+
 all: $(NAME)
 
 clean:

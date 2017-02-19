@@ -10,4 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LEMIN_H
+# define LEMIN_H
+# include "libft.h"
 
+typedef struct		s_room
+{
+	char			*name;
+	int				x;
+	int				y;
+	int				start;
+	int				end;
+	struct s_tube 	*tube;
+	struct s_room	*next;
+}					t_room;
+
+typedef struct 		s_tube
+{
+	char 			*name;
+	int				var;
+	struct s_tube	*next;
+	struct s_room	*room;
+}					t_tube;
+
+typedef struct 		s_ant
+{
+	int				ant;
+	struct s_ant	*next;
+}					t_ant;
+t_room				*init_room(char *name, int index);
+void 				add_back_room(t_room **r, char *name, int index);
+t_ant				*init_ant(char *name);
+t_tube				*init_tube(void);
+int					parser(void);
+void 				add_back_tube(t_tube **t, char *name, int index);
+#endif

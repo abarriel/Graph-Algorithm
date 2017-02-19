@@ -24,6 +24,7 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+int					ft_atoi_p(char **s);
 int					ft_pow(int s1);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *s, int c, size_t n);

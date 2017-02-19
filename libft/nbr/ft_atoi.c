@@ -39,3 +39,30 @@ int		ft_atoi(const char *str)
 	else
 		return (numar);
 }
+
+int		ft_atoi_p(char **s)
+{
+	int		i;
+	char	*str;
+	int		nga;
+	int		numar;
+
+	str = *s;
+	i = 0;
+	nga = 0;
+	numar = 0;
+	while (str[i] == ' ')
+		i++;
+	nga = (str[i] == '-') ? 1 : 0;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		numar = numar * 10;
+		numar = numar + (str[i] - '0');
+		i++;
+	}
+	*s = (str + i);
+	numar = (nga == 1) ? numar * -1 : numar;
+	return (numar);
+}
