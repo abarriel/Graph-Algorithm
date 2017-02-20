@@ -16,7 +16,7 @@ SRC		= lemin.c parser.c room.c tube.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
-CFLAGS	=  -I./ -Ilibft/includes/
+CFLAGS	=  -I./ -Ilibft/includes/ -g
 
 $(NAME): $(OBJ)
 	@make -C libft

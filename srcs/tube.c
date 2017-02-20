@@ -35,8 +35,16 @@ t_tube	*init_tube(t_room *r)
 
    if(!(u = (t_tube*)malloc(sizeof(t_tube))))
 	   ft_exit("Failed to Malloc");
+	  if (r != NULL)
+	{
    u->name = r->name;
    u->room = r;
+   }
+   else
+   {
+	   u->name = "Tes";
+	   u->room = NULL;
+   }
    u->next = NULL;
    return(u);
 }
@@ -56,40 +64,40 @@ void 	add_back_tube(t_tube **t, t_room *start_r)
 	tmp->next = init_tube(start_r);
 }
 
-int check_tube(t_room **r, t_room *rt, char *line, int index)
+int check_tube(t_room *tmp1,t_room *tmp, char *line, int index)
 {
-	t_tube *u;
-	t_room *start_r;
-
-	start_r = *r;
-	// ft_printf("{RED}{%s}\n",rt->name);
 	line = ft_strsub(line, index + 1, ft_strlen(line) - (index + 1));
-	while(start_r)
+	// ft_printf("{GRE}%s - ",tmp->name);
+	while(tmp1)
 	{
-		if(!ft_strcmp(line,start_r->name))
-			{
-				add_back_tube(&rt->tube,start_r);
-				// ft_printf("%s\n",rt->tube->room->name);
-				// return(0);
-			}
-		start_r = start_r->next;
+		if(!ft_strcmp(line,tmp1->name))
+		{
+			add_back_tube(&tmp->tube,tmp1);
+			add_back_tube(&tmp1->tube,tmp);
+
+		}
+		// else
+		// 	add_back_tube(&tmp->tube,NULL);
+		// PAS OUBLIER DE ELSE SI LE TUBE POINT SUR UN ENDROIT INCONNU ALORS ON ARRETE DE RECUPERER LES INFO
+		// ET AVEC CE QUON A ON ESSAYE DE TRACE UN CHEMIN, PAS OUBLEIR
+		tmp1 = tmp1->next;
 	}
 	return (0);
 }
+
 int add_tube(t_room **r, char *line, int index)
 {
-	t_room *rt;
+	t_room *tmp;
+	t_room *tmp1;
+	char *s;
 
-	rt = *r;
-	while(rt)
+	tmp = *r;
+	tmp1 = tmp;
+	while (tmp)
 	{
-		if(!ft_strncmp(line,rt->name,index))
-		{
-			check_tube(r, rt, line, index);
-			// ft_printf("[%s]\n",rt->tube->room->name);
-		}
-		rt = rt->next;
+		if(!ft_strncmp(line,tmp->name,index))
+			check_tube(tmp1, tmp, line, index);
+		tmp = tmp->next;
 	}
-	// ft_printf("[%s]\n",(*r)->tube->room->name);
 	return(0);
 }

@@ -11,7 +11,71 @@
 /* ************************************************************************** */
 
 #include "lemin.h"
+void print_room(t_room *r)
+{
+	while(r)
+	{
+		if (r->end == 1)
+			break;
+		r = r->next;
+	}
+	// ft_printf("{RED}%s\n", r->name);
+	// r = r->tube->room;
+	// ft_printf("{GRE}%s\n", r->name);
+	// if(r->tube)
+	// {
+	// r = r->tube->room;
+	// ft_printf("{GRE}%s\n", r->name);
+	// }
+	// if(r->tube)
+	// {
+	// r = r->tube->room;
+	// ft_printf("{GRE}%s\n", r->name);
+	// }
+	// r = r->tube->room;
+// ft_printf("{GRE}%s\n", r->name);
+// r = r->next;
+// ft_printf("{GRE}%s\n", r->name);
+// r = r->tube->room;
+// ft_printf("{GRE}%s\n", r->name);
+// r = r->next;
+// ft_printf("{GRE}%s\n", r->name);
+// r = r->tube->room;
+// ft_printf("{GRE}%s\n", r->name);
+// r = r->next;
+// }
+	//
+	// while (r)
+	// {
+	// 	if (r->start == 1)
+	// 	ft_printf("{RED}%s%s",r->name, " = Start");
+	// 	else if (r->end == 1)
+	// 	ft_printf("{RED}%s%s",r->name, " = End");
+	// 	else
+	// 	ft_printf("{GRE}%s", r->name);
+	// 	if (r->tube == NULL)
+	// 		r = r->next;
+	// 	else
+	// 	{
+	// 		while(r->tube)
+	// 		{
+	// 		ft_printf("{YEL} - %s",r->tube->name);
+	// 		r->tube = r->tube->next;
+	// 		}
+	// 		r = r->next;
+	// 	}
+	// 	ft_printf("\n");
+	// 	// r = r->next;
+	// }
+	// while(r)
+	// {
+	// 	if (r->start == 1)
+	// 	break;
+	// 	r = r->next;
+	// }
 
+
+}
 int		parser(void)
 {
 	char	*line;
@@ -33,19 +97,6 @@ int		parser(void)
 		else
 				add_back_room(&r, line, 0);
 	}
-	// ft_printf("%s",r->tube->name);
-	while (r)
-	{
-		if (r->start == 1)
-		ft_printf("{GRE}%s%s",r->name, " = Start");
-		else if (r->end == 1)
-		ft_printf("{GRE}%s%s",r->name, " = End");
-		else
-		ft_printf("{GRE}%s", r->name);
-		// if(r->tube->room)
-		// ft_printf("{RED} = %s", r->tube->room->name);
-		ft_printf("\n");
-		r = r->next;
-	}
+	print_room(r);
 	return (0);
 }

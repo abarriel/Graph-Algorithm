@@ -31,6 +31,8 @@ t_room	*init_room(char *name, int index)
 		ft_exit("Failed to Malloc");
 	r->tube = NULL;
 	r->next = NULL;
+	r->y = 0;
+	r->x = 0;
 	r->name = ft_name_coord(name);
 	r->start = (index == 1) ? 1 : 0;
 	r->end = (index == 2) ? 1 : 0;
