@@ -14,10 +14,15 @@
 
 int		if_so(char conv, char *symb)
 {
+	char *tmp;
+
+	tmp = NULL;
+	if (symb)
+		tmp = symb;
 	while (symb && *symb)
 	{
 		if (conv == *symb)
-			return (1);
+			return (symb - tmp);
 		symb++;
 	}
 	return (0);

@@ -12,11 +12,11 @@
 
 NAME	= lem_in
 
-SRC		= lemin.c parser.c tools.c
+SRC		= lemin.c parser.c room.c tube.c
 
-OBJ		= $(SRC:.c=.o)
+OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
-CFLAGS	=   -Iincludes/ -Ilibft/includes/
+CFLAGS	=  -I./ -Ilibft/includes/
 
 $(NAME): $(OBJ)
 	@make -C libft

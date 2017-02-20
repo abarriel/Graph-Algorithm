@@ -38,10 +38,10 @@ typedef struct 		s_ant
 	int				ant;
 	struct s_ant	*next;
 }					t_ant;
+int 				add_tube(t_room **r, char *line, int index);
 t_room				*init_room(char *name, int index);
 void 				add_back_room(t_room **r, char *name, int index);
 t_ant				*init_ant(char *name);
-t_tube				*init_tube(void);
+t_tube				*init_tube(t_room *r);
 int					parser(void);
-void 				add_back_tube(t_tube **t, char *name, int index);
 #endif
