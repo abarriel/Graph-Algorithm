@@ -39,6 +39,57 @@ int		ft_atoi(const char *str)
 	else
 		return (numar);
 }
+int		len_check_max(char *str)
+{
+	int i;
+	int u;
+
+	u = 0;
+	i = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+			|| (str[i] == '\v') || (str[i] == '\r') || (str[i] == '\f'))
+		i++;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	while (str[i] == '0')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		i++;
+		u++;
+	}
+	if (u > 10)
+		return (1);
+	return (0);
+}
+long 	ft_atol(const char *str)
+{
+	long	i;
+	int 	u;
+	long	nga;
+	long	numar;
+
+	i = 0;
+	numar = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+			|| (str[i] == '\v') || (str[i] == '\r') || (str[i] == '\f'))
+		i++;
+	nga = (str[i] == '-') ? 1 : 0;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	u = i;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		u = (str[i] == '0') ? u - 1: u;
+		numar = numar * 10;
+		numar = numar + (str[i] - '0');
+		i++;
+	}
+	if (len_check_max((char *)str) == 1)
+		return (-1);
+	numar = (nga == 1) ? numar * -1 : numar;
+	return (numar);
+}
 
 int		ft_atoi_p(char **s)
 {

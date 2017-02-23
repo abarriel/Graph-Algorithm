@@ -13,6 +13,7 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 # include "libft.h"
+# include "limits.h"
 
 typedef struct		s_room
 {
@@ -21,23 +22,27 @@ typedef struct		s_room
 	int				y;
 	int				start;
 	int				end;
-	struct s_tube 	*tube;
+	struct s_tube	*tube;
 	struct s_room	*next;
 }					t_room;
 
-typedef struct 		s_tube
+typedef struct		s_tube
 {
-	char 			*name;
+	char			*name;
 	int				var;
 	struct s_tube	*next;
 	struct s_room	*room;
 }					t_tube;
 
-typedef struct 		s_ant
+typedef struct		s_ant
 {
 	int				ant;
 	struct s_ant	*next;
 }					t_ant;
+void 				check_room(t_room *tmp);
+int 				start_algo(t_room *r, t_ant *a);
+int 				check_stopping(t_room *tmp, char *line, int index);
+int					if_so_(char conv, char *symb);
 int 				add_tube(t_room **r, char *line, int index);
 t_room				*init_room(char *name, int index);
 void 				add_back_room(t_room **r, char *name, int index);

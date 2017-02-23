@@ -17,6 +17,7 @@
 # include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct		s_list
 {
@@ -24,6 +25,8 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+int					ft_sdigit(char *c);
+long				ft_atol(const char *str);
 int					ft_atoi_p(char **s);
 int					ft_pow(int s1);
 void				ft_bzero(void *s, size_t n);

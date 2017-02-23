@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/19 01:59:56 by abarriel          #+#    #+#             */
-/*   Updated: 2016/11/19 02:00:07 by abarriel         ###   ########.fr       */
+/*   Created: 2017/02/23 16:52:46 by abarriel          #+#    #+#             */
+/*   Updated: 2017/02/23 16:52:47 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lemin.h"
 
-void	ft_exit(const char *message)
+int start_algo(t_room *r, t_ant *a)
 {
-	if (message != NULL)
-		ft_putendl_fd(message, 2);
-	exit(1);
+	return 0;
 }

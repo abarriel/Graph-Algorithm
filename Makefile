@@ -12,7 +12,7 @@
 
 NAME	= lem_in
 
-SRC		= lemin.c parser.c room.c tube.c
+SRC		= lemin.c parser.c room.c tube.c algo.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

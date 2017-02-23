@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/19 15:55:03 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/02/23 16:59:45 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 char	*ft_name_coord(char *name)
 {
-	char *str;
+	char	*str;
 
 	str = "NULL";
-	str = *ft_strsplit(name,' ');
-	// if (!(ft_strchr(name, '-')))
-	// 	ft_exit("Name with -");
-	return(str);
+	str = *ft_strsplit(name, ' ');
+	return (str);
 }
 
 t_room	*init_room(char *name, int index)
 {
 	t_room	*r;
 
-	if(!(r = (t_room*)malloc(sizeof(t_room))))
+	if (!(r = (t_room*)malloc(sizeof(t_room))))
 		ft_exit("Failed to Malloc");
 	r->tube = NULL;
 	r->next = NULL;
@@ -36,40 +34,56 @@ t_room	*init_room(char *name, int index)
 	r->name = ft_name_coord(name);
 	r->start = (index == 1) ? 1 : 0;
 	r->end = (index == 2) ? 1 : 0;
-	return(r);
-
+	return (r);
 }
 
-int 	parse_error_room(int index, char *n)
+void	parse_error_coord(char *s)
 {
-	static int u = 0;
+	char	**tab;
+	int		i;
 
+	i = -1;
+	tab = ft_strsplit(s, ' ');
+	while (tab[++i])
+		;
+	if (i != 3)
+		ft_exit("Wrong Input of Room");
+	if ((*tab[1] < 0 && *tab[1] > 9) || (*tab[2] < 0 && *tab[2] > 9))
+		ft_exit("Wrong Coord");
+	if ((ft_sdigit(tab[1]) || ft_sdigit(tab[2])))
+		ft_exit("Coord not a good number");
+}
+
+int		parse_error_room(int index, char *n)
+{
+	static int	u = 0;
+
+	if_so_('-', n);
 	if (*n == '#')
 		return (0);
 	if (u == 2 && index == 2)
 		ft_exit("Plusieur End");
 	if (u == 1 && index == 1)
 		ft_exit("Plusieur Start");
-	// if (!(ft_isdigit(*n)))
-	// 	ft_exit("ERROR");
+	parse_error_coord(n);
 	u = (index == 2) ? 2 : u;
 	u = (index == 1) ? 1 : u;
 	return (1);
 }
 
-void 	add_back_room(t_room **r, char *name, int index)
+void	add_back_room(t_room **r, char *name, int index)
 {
 	t_room	*tmp;
 
 	if (!(parse_error_room(index, name)))
 		return ;
 	tmp = *r;
-	if(!tmp)
+	if (!tmp)
 	{
 		*r = init_room(name, index);
 		return ;
 	}
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = init_room(name, index);
 }
