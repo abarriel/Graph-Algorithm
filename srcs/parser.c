@@ -72,10 +72,7 @@ void	print_room(t_room *r)
 		{
 			while (r->tube)
 			{
-				if(r->tube->previous == 1)
-				ft_printf("{BLU} - %s", r->tube->name);
-				else
-				ft_printf("{YEL} - %s", r->tube->name);
+					ft_printf("{YEL} - %s", r->tube->name);
 				r->tube = r->tube->next;
 			}
 			r = r->next;

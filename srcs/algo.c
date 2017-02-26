@@ -12,52 +12,41 @@
 
 #include "lemin.h"
 
-t_room *recur_algo(t_room *r)
+t_room *recur_algo(t_room *r, char *name)
 {
-	ft_printf("Finder %p poids:[%d] %s\n",r,r->poids,r->name);
-	if (r->end == 1)
-	{
-			ft_printf("Toucher la fin %p poids:[%d] %s\n",r,r->poids,r->name);
-			exit(1);
-	}
-	if(r->poids == -1)
-	{
-		r->poids = 0;
-		if(r->tube->next)
-			r->tube =  r->tube->next;
-	}
-	if (r->poids == 0)
-	{
-		r->poids = -1;
-		if (r->tube->room )
-	 	r = r->tube->room;
-	}
-	recur_algo(r);
+	// ft_printf("{YEL}%s \n",r->tube->room->name);
+
+	// if (ft_strcmp(r->tube->room->name, name) == 0)
+	// 	{
+	// 		// ft_printf("%s\n",r->tube->room->name);
+	// 		if (r->tube->next)
+	// 		{
+	// 			r->tube = r->tube->next;
+	// 			r = r->tube->room;
+	// 		}
+	// 	}
+	// else
+	// 	r = r->tube->room;
 	return(r);
 }
 int start_algo(t_room *r, t_ant *a)
 {
-	while(r->start != 1)
-		r = r->next;
-	recur_algo(r);
-	// if (r)
 	// while(r)
 	// {
 	// 	ft_printf("Finder %p poids:[%d] %s\n",r,r->poids,r->name);
 	// 	if (r->end == 1)
 	// 	{
-	// 		ft_printf("Toucher la fin %p poids:[%d] %s\n",r,r->poids,r->name);
+	// 		ft_printf("Toucher la fin %p %s\n",r,r->name);
 	// 		exit(1);
 	// 	}
 	// 	if(r->poids == -1)
 	// 	{
 	// 		if(r->tube->next)
 	// 			r->tube =  r->tube->next;
-	// 		if(r->tube->room->poids == -1)
-	// 			r->tube->room->poids = 0;
 	// 	}
 	// 	if (r->tube->room)
 	// 	{
+	//
 	// 	r->poids = -1;
 	// 	r = r->tube->room;
 	// 	}
@@ -128,6 +117,6 @@ int start_algo(t_room *r, t_ant *a)
 	// // 	// r = r->tube->room;
 	// 	r = r->next;
 	// }
-	// print_room(r);
+	print_room(r);
 	return 0;
 }

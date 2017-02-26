@@ -70,7 +70,6 @@ int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
 {
 	int		stop;
 
-	line = ft_strsub(line, index + 1, ft_strlen(line) - (index + 1));
 	stop = check_stopping(tmp1, line, ft_strlen(line));
 	while (tmp1 && stop != 1)
 	{
@@ -88,17 +87,18 @@ int		add_tube(t_room **r, char *line, int index)
 {
 	t_room	*tmp;
 	t_room	*tmp1;
-	char	*s;
+	char	**s;
 	int		stop;
 
 	tmp = *r;
 	check_room(tmp);
 	tmp1 = tmp;
+	s = ft_strsplit(line,'-');
 	stop = check_stopping(tmp, line, index);
 	while (tmp && stop != 1)
 	{
-		if (!ft_strncmp(line, tmp->name, index))
-			stop = check_tube(tmp1, tmp, line, index);
+		if (!ft_strcmp(s[0], tmp->name))
+			stop = check_tube(tmp1, tmp, s[1], index);
 		tmp = tmp->next;
 	}
 	return (stop);
