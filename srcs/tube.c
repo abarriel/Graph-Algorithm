@@ -29,7 +29,7 @@ int		parse_error_tube(int index, char *n)
 	return (1);
 }
 
-t_tube	*init_tube(t_room *r)
+t_tube	*init_tube(t_room *r, int previous)
 {
 	t_tube	*u;
 
@@ -42,26 +42,28 @@ t_tube	*init_tube(t_room *r)
 	}
 	else
 	{
-		u->name = "Tes";
+		u->name = "Test";
 		u->room = NULL;
 	}
+	u->previous = previous;
+	u->poids = 0;
 	u->next = NULL;
 	return (u);
 }
 
-void	add_back_tube(t_tube **t, t_room *start_r)
+void	add_back_tube(t_tube **t, t_room *start_r, int previous)
 {
 	t_tube	*tmp;
 
 	tmp = *t;
 	if (!tmp)
 	{
-		*t = init_tube(start_r);
+		*t = init_tube(start_r, previous);
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_tube(start_r);
+	tmp->next = init_tube(start_r, previous);
 }
 
 int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
@@ -74,8 +76,8 @@ int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
 	{
 		if (!ft_strcmp(line, tmp1->name))
 		{
-			add_back_tube(&tmp->tube, tmp1);
-			add_back_tube(&tmp1->tube, tmp);
+			add_back_tube(&tmp->tube, tmp1, 0);
+			add_back_tube(&tmp1->tube, tmp, 1);
 		}
 		tmp1 = tmp1->next;
 	}

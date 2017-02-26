@@ -72,6 +72,9 @@ void	print_room(t_room *r)
 		{
 			while (r->tube)
 			{
+				if(r->tube->previous == 1)
+				ft_printf("{BLU} - %s", r->tube->name);
+				else
 				ft_printf("{YEL} - %s", r->tube->name);
 				r->tube = r->tube->next;
 			}
@@ -105,6 +108,5 @@ int		parser(void)
 			add_back_room(&r, line, 0);
 	}
 	start_algo(r, a);
-	// print_room(r);
 	return (0);
 }
