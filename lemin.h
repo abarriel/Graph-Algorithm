@@ -42,7 +42,7 @@ typedef struct		s_ant
 	int				ant;
 	struct s_ant	*next;
 }					t_ant;
-void				print_room(t_room *r);
+void				print_room(t_room *b);
 void 				check_room(t_room *tmp);
 int 				start_algo(t_room *r, t_ant *a);
 int 				check_stopping(t_room *tmp, char *line, int index);
