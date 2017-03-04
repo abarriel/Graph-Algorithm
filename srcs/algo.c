@@ -12,51 +12,7 @@
 
 #include "lemin.h"
 
-void algo_lem__(t_room **r1, t_tube **tmp1)
-{
-	t_room *r;
-	t_tube *tmp;
-
-	r = *r1;
-	tmp = *tmp1;
-
-	r->tube = r->tube->next;
-	if (!r->tube)
-			{
-				r->poids = 2;
-				r->tube = tmp;
-				while (r->tube->prev)
-					r->tube = r->tube->prev;
-				while (r->tube->room->poids != 1 && r->tube->next)
-					r->tube = r->tube->next;
-				if (r->tube->room->poids != 1 && r->tube->next == NULL)
-					ft_exit("Invalid Path");
-				r = r->tube->room;
-			}
-		*r1 = r;
-	*tmp1 = tmp;
-}
-void algo_lem_(t_room **r1, t_tube **tmp1)
-{
-	t_room *r;
-	t_tube *tmp;
-
-	r = *r1;
-	tmp = *tmp1;
-	if (r->tube == NULL)
-		ft_exit("Invalid Path\n");
-	if (r->tube->room->poids == 0)
-		{
-			r->tube->room->poids = 1;
-			r = r->tube->room;
-		}
-		else
-			algo_lem__(&r,&tmp);
-	*r1 = r;
-	*tmp1 = tmp;
-}
-
-void	algo_lem(t_room *r)
+int	start_algo(t_room *r)
 {
 	t_tube *tmp;
 
@@ -74,20 +30,42 @@ void	algo_lem(t_room *r)
 			{
 				r = tmp->room;
 				r->poids = 1;
-				return ;
+				return 0;
 			}
 			tmp = tmp->next;
 		}
 		tmp = r->tube;
-		algo_lem_(&r,&tmp);
+		if (r->tube == NULL)
+			ft_exit("Invalid Path\n");
+		if (r->tube->room->poids == 0)
+		{
+			r->tube->room->poids = 1;
+			r = r->tube->room;
+		}
+		else
+		{
+			r->tube = r->tube->next;
+			if (!r->tube)
+			{
+				r->poids = 2;
+				r->tube = tmp;
+				while (r->tube->prev)
+					r->tube = r->tube->prev;
+				while (r->tube->room->poids != 1 && r->tube->next)
+					r->tube = r->tube->next;
+				if (r->tube->room->poids != 1 && r->tube->next == NULL)
+					ft_exit("Invalid Path");
+				r = r->tube->room;
+			}
+		}
 	}
-	return ;
+	return 0;
 }
 
 void handles_algo(t_room *r, t_ant *a)
 {
-	algo_lem(r);
+	start_algo(r);
 	print_room_r(r);
-	algo_lem(r);
+	start_algo(r);
 	print_room_rj(r);
 }
