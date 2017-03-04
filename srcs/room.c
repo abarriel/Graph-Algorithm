@@ -30,6 +30,7 @@ t_room	*init_room(char *name, int index)
 	r->tube = NULL;
 	r->next = NULL;
 	r->y = 0;
+	r->dj = 0;
 	r->x = 0;
 	r->by = 0;
 	r->poids = 0;
