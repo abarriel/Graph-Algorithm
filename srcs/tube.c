@@ -29,41 +29,35 @@ int		parse_error_tube(int index, char *n)
 	return (1);
 }
 
-t_tube	*init_tube(t_room *r, int previous)
+t_tube	*init_tube(t_room *r)
 {
 	t_tube	*u;
 
 	if (!(u = (t_tube*)malloc(sizeof(t_tube))))
 		ft_exit("Failed to Malloc");
-	if (r != NULL)
-	{
-		u->name = r->name;
-		u->room = r;
-	}
-	else
-	{
-		u->name = "Test";
-		u->room = NULL;
-	}
-	u->previous = previous;
-	u->poids = 0;
+	u->room = r;
 	u->next = NULL;
 	return (u);
 }
 
-void	add_back_tube(t_tube **t, t_room *start_r, int previous)
+void	add_back_tube(t_tube **t, t_room *start_r)
 {
 	t_tube	*tmp;
+	t_tube	*prev;
 
 	tmp = *t;
 	if (!tmp)
 	{
-		*t = init_tube(start_r, previous);
+		*t = init_tube(start_r);
+		(*t)->prev = NULL;
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_tube(start_r, previous);
+	prev = tmp;
+	tmp->next = init_tube(start_r);
+	tmp = tmp->next;
+	tmp->prev = prev;
 }
 
 int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
@@ -75,8 +69,8 @@ int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
 	{
 		if (!ft_strcmp(line, tmp1->name))
 		{
-			add_back_tube(&tmp->tube, tmp1, 0);
-			add_back_tube(&tmp1->tube, tmp, 1);
+			add_back_tube(&tmp->tube, tmp1);
+			add_back_tube(&tmp1->tube, tmp);
 		}
 		tmp1 = tmp1->next;
 	}

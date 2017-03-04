@@ -12,154 +12,82 @@
 
 #include "lemin.h"
 
-int 	handles_algo(t_room *r)
+void algo_lem__(t_room **r1, t_tube **tmp1)
 {
-	if (r->tube->room->poids == 1)
-	{
-		if (r->tube->next)
-			r->tube = r->tube->next;
-		else
-			r->poids = 2;
-	}
-	r = r->tube->room;
-	start_algo(r, NULL);
-	return 0;
-
-}
-
-t_tube	*new_list(t_tube **r)
-{
-	t_tube *begin_list;
-	t_tube *final;
-
-	begin_list = *r;
-	final = *r;
-	while (final)
-	{
-		ft_printf("%s\n",final->name);
-		final = final->next;
-	}
-		final = begin_list;
-		return (final);
-}
-
-int		start_algo(t_room *r, t_ant *a)
-{
-	static t_room *rmp;
+	t_room *r;
 	t_tube *tmp;
 
-	tmp = new_list(&r->tube);
-	if(!rmp)
-		rmp = r;
-	if (r && r->poids != 2)
-	{
-		r->poids = 1;
-		ft_printf("{GRE}[%s] - [%d]\n", r->name, r->poids);
-		// tmp = new_list(&r->tube);
-		handles_algo(r);
-	}
-	else if (r->poids == 2)
-	{
-		ft_printf("{GRE}Rentre a=[%s] - [%d]\n", r->name, r->poids);
-		ft_printf("{BLU}1erMaillon = [%s] - [%d]\n", tmp->name, tmp->poids);
-			// tmp =	new_list(&r->tube);
-		// tmp = r->tube->room;
-		r = r->tube->room;
-		// ft_printf("{YEL}Apres =[%s] - [%d]\n", r->name, r->poids);
-		while(r->tube && r->tube->room->poids == 2)
-		{
-			ft_printf("{PUR}Dedans tube[%s] - [%d]\n", r->tube->room->name, r->tube->room->poids);
-			if(r->tube->room->poids != 2)
+	r = *r1;
+	tmp = *tmp1;
+
+	r->tube = r->tube->next;
+	if (!r->tube)
 			{
-				r = r->tube->room;
-				// ft_printf("U\n");
-					break;
-			}
-			r->tube = r->tube->next;
-		}
-		ft_printf("{YEL}New r[%s] - [%d]\n", r->name, r->poids);
-			// ft_exit("ok");
-		// ft_printf("{PUR}Sorti tube[%s] - [%d]\n", tmp->tube->room->name, tmp->tube->room->poids);
-		if (r->tube)
-			r = r->tube->room;
-		else
-		{
 				r->poids = 2;
-			ft_exit("Bug ou OK");
+				r->tube = tmp;
+				while (r->tube->prev)
+					r->tube = r->tube->prev;
+				while (r->tube->room->poids != 1 && r->tube->next)
+					r->tube = r->tube->next;
+				if (r->tube->room->poids != 1 && r->tube->next == NULL)
+					ft_exit("Invalid Path");
+				r = r->tube->room;
+			}
+		*r1 = r;
+	*tmp1 = tmp;
+}
+void algo_lem_(t_room **r1, t_tube **tmp1)
+{
+	t_room *r;
+	t_tube *tmp;
+
+	r = *r1;
+	tmp = *tmp1;
+	if (r->tube == NULL)
+		ft_exit("Invalid Path\n");
+	if (r->tube->room->poids == 0)
+		{
+			r->tube->room->poids = 1;
+			r = r->tube->room;
 		}
-		// ft_printf("{YEL}New r[%s] - [%d]\n", r->name, r->poids);
-		// ft_printf("D\n");
-		// ft_printf("{PUR}r->tube[%s] - [%d]\n", r->tube->room->name, r->tube->room->poids);
-
-		// exit(1);
-		// if(r->tube->room->poids == 1)
-		// {
-		// 	// if(!r->tube->room->next)
-
-		// 	// ft_printf("{PUR}[%s] - [%d]\n", r->tube->room->next->name, r->tube->room->next->poids);
-		// }		// while(r->tube)
-		// // {
-			// ft_printf("{PUR}[%s] - [%d]\n", r->tube->room->name, r->tube->room->poids);
-		// 	r->tube = r->tube->next;
-		// }
-
-		// Sft_exit("dd");
-		ft_printf("{RED}Sort a [%s] - [%d]\n", r->name, r->poids);
-		// r = rmp;
-		handles_algo(r);
-		
-		// start_algo(r,a);
-	}
-	return (0);
+		else
+			algo_lem__(&r,&tmp);
+	*r1 = r;
+	*tmp1 = tmp;
 }
 
-// int 	handles_algo(t_room *r)
-// {
-// 	if (r->tube->room->poids == 1 || r->tube->room->poids == 3)
-// 	{
-// 		if (r->tube->next)
-// 		r->tube = r->tube->next;
-// 		else
-// 		r->tube->room->poids = 2;
-// 	}
-// 	if (r->tube->room->poids == 2)
-// 	{
-// 		// r = r->tube->room;
-// 		r->tube->room->poids = 2;
-// 		r->end = 1;
-// 	}
-// 	else 
-// 	r = r->tube->room;
-// 	start_algo(r, NULL);
-// 	return 0;
+void	algo_lem(t_room *r)
+{
+	t_tube *tmp;
 
-// }
-// int		start_algo(t_room *r, t_ant *a)
-// {
-// 	static t_room *rmp;
-// 	t_tube *tmp;
+	while (r->start != 1 && r)
+		r = r->next;
+	r->poids = 1;
+	while (r->end != 1)
+	{
+		if (r->start == 1 && r->poids == 2)
+			exit(0);
+		tmp = r->tube;
+		while (tmp)
+		{
+			if (tmp->room->end == 1)
+			{
+				r = tmp->room;
+				r->poids = 1;
+				return ;
+			}
+			tmp = tmp->next;
+		}
+		tmp = r->tube;
+		algo_lem_(&r,&tmp);
+	}
+	return ;
+}
 
-// 	if(!rmp)
-// 		rmp = r;
-// 	if (r && r->end != 1)
-// 	{
-// 	r->poids = 1;
-// 		ft_printf("{GRE}[%s] - [%d]\n", r->name, r->poids);
-// 		handles_algo(r);
-// 	}
-// 	else
-// 	{
-// 		r->poids = 3;
-// 		ft_printf("{RED}[%s] - [%d]\n", r->name, r->poids);
-// 		if (r->tube->room->poids == 1)
-// 		{
-// 		if (r->tube->next)
-// 		r->tube = r->tube->next;
-// 		}
-// 		r = r->tube->room;
-// 		handles_algo(r);
-		
-// 		// start_algo(r,a);
-// 	}
-// 	return (0);
-// }
+void handles_algo(t_room *r, t_ant *a)
+{
+	algo_lem(r);
+	print_room_r(r);
+	algo_lem(r);
+	print_room_rj(r);
+}

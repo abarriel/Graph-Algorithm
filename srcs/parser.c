@@ -55,42 +55,10 @@ int		check_stopping(t_room *tmp, char *line, int index)
 	return (0);
 }
 
-void	print_room(t_room *b)
-{
-	ft_printf("\n");
-	t_room *r;
-	t_room *begin_list;
-	r = b;
-	begin_list = b;
-	while (r)
-	{
-		if (r->start == 1)
-			ft_printf("{RED}%s%s", r->name, " = Start");
-		else if (r->end == 1)
-			ft_printf("{RED}%s%s", r->name, " = End");
-		else
-			ft_printf("{GRE}%s", r->name);
-		if (r->tube == NULL)
-			r = r->next;
-		else
-		{
-			while (r->tube)
-			{
-					ft_printf("{YEL} - %s", r->tube->name);
-				r->tube = r->tube->next;
-			}
-			r = r->next;
-		}
-		ft_printf("\n");
-	}
-	b = begin_list;
-}
-
 int		parser(void)
 {
 	char	*line;
 	t_room	*r;
-	t_room	*tmp;
 	t_ant	*a;
 	int		i;
 	int		stop;
@@ -110,9 +78,6 @@ int		parser(void)
 		else
 			add_back_room(&r, line, 0);
 	}
-	tmp = r;
-	// print_room(tmp);
-	start_algo(r, a);
-	//handles_algo(r,a);
+	handles_algo(r,a);
 	return (0);
 }
