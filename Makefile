@@ -12,7 +12,7 @@
 
 NAME	= lem_in
 
-SRC		= lemin.c parser.c room.c tube.c algo.c print.c djik.c
+SRC		= lemin.c parser.c room.c tube.c algo.c print.c path.c djisktra.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
@@ -34,3 +34,4 @@ fclean: clean
 	@make -C libft/ fclean
 
 re: fclean $(NAME)
+

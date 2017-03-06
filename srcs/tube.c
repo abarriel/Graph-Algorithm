@@ -85,6 +85,7 @@ int		add_tube(t_room **r, char *line, int index)
 	int		stop;
 
 	tmp = *r;
+	
 	check_room(tmp);
 	tmp1 = tmp;
 	s = ft_strsplit(line,'-');

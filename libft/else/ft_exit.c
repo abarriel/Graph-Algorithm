@@ -16,5 +16,5 @@ void	ft_exit(const char *message)
 {
 	if (message != NULL)
 		ft_putendl_fd(message, 2);
-	exit(1);
+	exit(0);
 }
