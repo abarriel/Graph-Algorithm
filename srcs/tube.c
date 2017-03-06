@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 13:27:03 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/23 17:58:31 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/06 07:42:49 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int		parse_error_tube(int index, char *n)
 	if (*n == '#')
 		return (0);
 	if (u == 2 && index == 2)
-		ft_exit("Plusieur End");
+		ft_exit("More than one end");
 	if (u == 1 && index == 1)
-		ft_exit("Plusieur Start");
+		ft_exit("More than one start");
 	if (!(ft_isdigit(*n)))
 		ft_exit("ERROR");
 	u = (index == 2) ? 2 : u;
@@ -77,6 +77,17 @@ int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
 	return (stop);
 }
 
+int		check_link(t_room *r, char *s1)
+{
+	while (r)
+	{
+		if (!ft_strcmp(r->name, s1))
+			return (0);
+		r = r->next;
+	}
+	return (1);
+}
+
 int		add_tube(t_room **r, char *line, int index)
 {
 	t_room	*tmp;
@@ -85,16 +96,23 @@ int		add_tube(t_room **r, char *line, int index)
 	int		stop;
 
 	tmp = *r;
-	
+	stop = 0;
 	check_room(tmp);
 	tmp1 = tmp;
-	s = ft_strsplit(line,'-');
-	stop = check_stopping(tmp, line, index);
+	s = ft_strsplit(line, '-');
+	if (!s[1] || !s[0])
+		return (1);
+	else
+	{
+		stop = check_link(*r, s[0]);
+		stop += check_link(*r, s[1]);
+	}
 	while (tmp && stop != 1)
 	{
 		if (!ft_strcmp(s[0], tmp->name))
 			stop = check_tube(tmp1, tmp, s[1], index);
 		tmp = tmp->next;
 	}
+	free(s);
 	return (stop);
 }

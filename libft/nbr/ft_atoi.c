@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/08 04:08:34 by abarriel          #+#    #+#             */
-/*   Updated: 2016/11/08 04:53:59 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/06 07:47:26 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		ft_atoi(const char *str)
 	else
 		return (numar);
 }
+
 int		len_check_max(char *str)
 {
 	int i;
@@ -62,10 +63,11 @@ int		len_check_max(char *str)
 		return (1);
 	return (0);
 }
-long 	ft_atol(const char *str)
+
+long	ft_atol(const char *str)
 {
 	long	i;
-	int 	u;
+	int		u;
 	long	nga;
 	long	numar;
 
@@ -80,7 +82,7 @@ long 	ft_atol(const char *str)
 	u = i;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		u = (str[i] == '0') ? u - 1: u;
+		u = (str[i] == '0') ? u - 1 : u;
 		numar = numar * 10;
 		numar = numar + (str[i] - '0');
 		i++;

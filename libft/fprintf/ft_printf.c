@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 16:47:19 by abarriel          #+#    #+#             */
-/*   Updated: 2017/01/29 23:06:19 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/06 07:46:21 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_init(t_stock *s)
 	free(f);
 	ft_init(s);
 }
+
 int		ft_dprintf(int fd, const char *format, ...)
 {
 	t_stock	*s;

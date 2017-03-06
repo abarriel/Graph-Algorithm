@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/23 16:59:45 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/06 07:41:01 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_name_coord(char *name)
 
 	str = "NULL";
 	str = *ft_strsplit(name, ' ');
+	free(name);
 	return (str);
 }
 
@@ -50,11 +51,12 @@ void	parse_error_coord(char *s)
 	while (tab[++i])
 		;
 	if (i != 3)
-		ft_exit("Wrong Input of Room");
+		ft_exit("Wrong input of room");
 	if ((*tab[1] < 0 && *tab[1] > 9) || (*tab[2] < 0 && *tab[2] > 9))
-		ft_exit("Wrong Coord");
+		ft_exit("Wrong coord");
 	if ((ft_sdigit(tab[1]) || ft_sdigit(tab[2])))
 		ft_exit("Coord not a good number");
+	free(tab);
 }
 
 int		parse_error_room(int index, char *n)
@@ -65,28 +67,69 @@ int		parse_error_room(int index, char *n)
 	if (*n == '#')
 		return (0);
 	if (u == 2 && index == 2)
-		ft_exit("Plusieur End");
+		ft_exit("More than one end");
 	if (u == 1 && index == 1)
-		ft_exit("Plusieur Start");
+		ft_exit("More than one start");
 	parse_error_coord(n);
 	u = (index == 2) ? 2 : u;
 	u = (index == 1) ? 1 : u;
 	return (1);
 }
 
+char	*next_comment(char *name)
+{
+	char *tmp;
+
+	tmp = name;
+	while (*tmp == '#')
+	{
+		get_next_line(0, &name);
+		tmp = ft_strdup(name);
+		free(name);
+	}
+	return (tmp);
+}
+
+void	check_if(t_room *r, char *name)
+{
+	int i;
+
+	i = 0;
+	while (name[i] != ' ')
+		i++;
+	while (r)
+	{
+		if (!ft_strncmp(r->name, name, i))
+			ft_exit("Same Room");
+		r = r->next;
+	}
+}
+
 void	add_back_room(t_room **r, char *name, int index)
 {
 	t_room	*tmp;
+	char	*smp;
 
-	if (!(parse_error_room(index, name)))
+	smp = ft_strdup(name);
+	if (index == 1 || index == 2)
+	{
+		free(smp);
+		smp = ft_strdup(next_comment(name));
+	}
+	free(name);
+	if (!(parse_error_room(index, smp)))
+	{
+		free(smp);
 		return ;
+	}
+	check_if(*r, smp);
 	tmp = *r;
 	if (!tmp)
 	{
-		*r = init_room(name, index);
+		*r = init_room(smp, index);
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_room(name, index);
+	tmp->next = init_room(smp, index);
 }

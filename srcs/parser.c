@@ -61,16 +61,18 @@ int		parser(void)
 	t_room	*r;
 	t_ant	*a;
 	int		i;
-	int		stop;
 
-	stop = 0;
 	i = 0;
 	get_next_line(0, &line);
 	a = init_ant(line);
-	while (get_next_line(0, &line) > 0 && stop != 1)
+	free(line);
+	while (get_next_line(0, &line) > 0)
 	{
 		if (*line != '#' && (i = if_so_('-', line)))
-			stop = add_tube(&r, line, i);
+		{
+			if((add_tube(&r, line, i)))
+				break ;
+		}
 		else if (!ft_strcmp("##start", line) && get_next_line(0, &line) == 1)
 			add_back_room(&r, line, 1);
 		else if (!ft_strcmp("##end", line) && get_next_line(0, &line) == 1)
