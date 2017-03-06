@@ -18,7 +18,6 @@ char	*ft_name_coord(char *name)
 
 	str = "NULL";
 	str = *ft_strsplit(name, ' ');
-	free(name);
 	return (str);
 }
 
@@ -56,7 +55,6 @@ void	parse_error_coord(char *s)
 		ft_exit("Wrong coord");
 	if ((ft_sdigit(tab[1]) || ft_sdigit(tab[2])))
 		ft_exit("Coord not a good number");
-	free(tab);
 }
 
 int		parse_error_room(int index, char *n)
@@ -78,16 +76,9 @@ int		parse_error_room(int index, char *n)
 
 char	*next_comment(char *name)
 {
-	char *tmp;
-
-	tmp = name;
-	while (*tmp == '#')
-	{
+	while (*name == '#')
 		get_next_line(0, &name);
-		tmp = ft_strdup(name);
-		free(name);
-	}
-	return (tmp);
+	return (name);
 }
 
 void	check_if(t_room *r, char *name)
@@ -108,28 +99,19 @@ void	check_if(t_room *r, char *name)
 void	add_back_room(t_room **r, char *name, int index)
 {
 	t_room	*tmp;
-	char	*smp;
 
-	smp = ft_strdup(name);
 	if (index == 1 || index == 2)
-	{
-		free(smp);
-		smp = ft_strdup(next_comment(name));
-	}
-	free(name);
-	if (!(parse_error_room(index, smp)))
-	{
-		free(smp);
+		name = next_comment(name);
+	if (!(parse_error_room(index, name)))
 		return ;
-	}
-	check_if(*r, smp);
+	check_if(*r, name);
 	tmp = *r;
 	if (!tmp)
 	{
-		*r = init_room(smp, index);
+		*r = init_room(name, index);
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_room(smp, index);
+	tmp->next = init_room(name, index);
 }

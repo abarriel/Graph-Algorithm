@@ -65,7 +65,6 @@ int		parser(void)
 	i = 0;
 	get_next_line(0, &line);
 	a = init_ant(line);
-	free(line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (*line != '#' && (i = if_so_('-', line)))
@@ -81,5 +80,6 @@ int		parser(void)
 			add_back_room(&r, line, 0);
 	}
 	handles_algo(r,a);
+	// handles_path(r,a);
 	return (0);
 }
