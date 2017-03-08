@@ -46,6 +46,7 @@ t_ant	*init_ant(char *name)
 			ft_strcmp(name, "##end") && *name == '#')
 		get_next_line(0, &name);
 	i = ft_atol(name);
+	ft_printf("%s\n");
 	if (i <= 0 || !name || i > INT_MAX)
 		ft_exit("Wrong ant's numbers");
 	if (!(r = (t_ant*)malloc(sizeof(t_ant))))

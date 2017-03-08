@@ -66,6 +66,7 @@ t_path	*init_path(char *name, int start,  int p)
 	if (!(u = (t_path*)malloc(sizeof(t_path))))
 		ft_exit("Failed to Malloc");
 	u->name = name;
+	u->ants = 0;
 	u->start = start;
 	u->size += p;
 	u->next = NULL;
