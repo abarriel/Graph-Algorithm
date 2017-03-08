@@ -55,7 +55,7 @@ int		check_stopping(t_room *tmp, char *line, int index)
 	return (0);
 }
 
-void	parser(void)
+void	parser(int bp, int bc)
 {
 	char	*line;
 	t_room	*r;
@@ -63,8 +63,10 @@ void	parser(void)
 	int		i;
 
 	i = 0;
+	r = NULL;
+	line = NULL;
 	get_next_line(0, &line);
-	a = init_ant(line);
+	a = init_ant(line, bp, bc);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (*line != '#' && (i = if_so_('-', line)))

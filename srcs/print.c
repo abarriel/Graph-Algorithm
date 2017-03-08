@@ -18,10 +18,10 @@ void	print_path(t_path *path)
 		return ;
 	while (path)
 	{
-		ft_printf("{YEL}%s\n", path->name);
+		ft_printf("%s ", path->name);
 		path = path->next;
 	}
-	ft_printf("\n");
+	ft_printf("\n\n");
 }
 
 void	print_room_r(t_room *r)

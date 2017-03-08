@@ -116,7 +116,8 @@ void	handles_algo(t_room *r, t_ant *a)
 		path[b] = save_path(r, &i);
 		if (!path[0])
 			ft_exit("Invalid Path");
-		print_path(path[b]);
+		if(a->bonus_path == 1)
+			print_path(path[b]);
 		b++;
 	}
 	handles_path(path, a, j);

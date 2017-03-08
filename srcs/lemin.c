@@ -37,7 +37,7 @@ int		if_so_(char conv, char *symb)
 	return (0);
 }
 
-t_ant	*init_ant(char *name)
+t_ant	*init_ant(char *name, int bp, int bc)
 {
 	t_ant		*r;
 	long		i;
@@ -52,12 +52,35 @@ t_ant	*init_ant(char *name)
 	if (!(r = (t_ant*)malloc(sizeof(t_ant))))
 		ft_exit("Failed to Malloc");
 	r->ant = i;
-	r->next = NULL;
+	r->bonus_color = bc;
+	r->bonus_path = bp;
 	return (r);
 }
 
-int		main(void)
+void 	bonus_lemin(int *bc, int *bp, char **ac, int av)
+{	
+	int i;
+
+	i = 1;
+	while(ac[i])
+	{
+		if (ft_strcmp("-c",ac[i]) == 0)
+				(*bp)++;
+		else if(ft_strcmp("-p",ac[i]) == 0)
+				(*bc)++;
+		i++;
+	}
+}
+
+int		main(int ac, char **av)
 {
-	parser();
+	int bc;
+	int bp;
+
+	bc = 0;
+	bp = 0;
+	if (ac > 1)
+	bonus_lemin(&bc,&bp,av,ac);
+	parser(bc, bp);
 	return (0);
 }

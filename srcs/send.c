@@ -31,15 +31,27 @@ void	reverse_list(t_path **list, t_ant *a)
 	q->start = 2;
 	*list = q;
 }
-ft_putstr_fd(RED, fd);
-	if (color_nfun == 2)
-		ft_putstr_fd(GREEN, fd);
-	if (color_nfun == 3)
-		ft_putstr_fd(BLUE, fd);
-	if (color_nfun == 4)
-		ft_putstr_fd(PURPLE, fd);
-	if (color_nfun == 5)
-		ft_putstr_fd(YELLOW, fd);
+
+void 	print_ants(int bc, int ants, char *name)
+{
+	int i;
+
+	i = 1;
+	if (bc == 0)
+	{
+		ft_printf("L%d-%s ", ants, name);
+		return ;
+	}
+	i = ants;
+	if (ants > 256)
+		i = ants - 256;	
+	ft_putstr("\e[38;5;");
+	ft_putnbr(i);
+	ft_putstr("m");
+	ft_printf("L%d-%s ", ants, name);
+	ft_putstr(RESET);
+}
+
 void	handles_path(t_path **p, t_ant *a, int max_path)
 {
 	int i;
@@ -63,7 +75,6 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 	i = 0;
 	while(end <= a->ant)
 	{
-		ft_printf("{GRE}%d\n",p[i]->ants);
 		while(i < max_path)
 		{
 			while(p[i])
@@ -72,12 +83,9 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 				{
 					end++;
 					p[i]->ants = end;
-					ft_putstr("0;[")
-					ft_printf("L%d-%s ",p[i]->ants,p[i]->name);
+					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 					if (end == a->ant)
 						return ;
-					// if(p[i]->ants == a->ant)
-					// 	return;
 				}
 				else if (p[i]->next && p[i]->next->start == 1 && start > 0)
 				{
@@ -85,13 +93,13 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 					start--;
 					ants++;
 					p[i]->ants = ants;
-					ft_printf("L%d-%s ",p[i]->ants,p[i]->name);
+					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 				}
 				else if (p[i]->next && p[i]->next->ants > 0 && p[i]->next->start != 1)
 				{
 					p[i]->ants = p[i]->next->ants;
 					p[i]->next->ants = 0;
-					ft_printf("L%d-%s ",p[i]->ants,p[i]->name);
+					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 				}
 				p[i] = p[i]->next;
 			}

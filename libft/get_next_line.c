@@ -64,7 +64,7 @@ int			get_next_line(int const fd, char **line)
 	char			*tmp;
 	int				i;
 
-	if (!line || fd < 0 || fd > 256 || !(tmpl = (char *)malloc(BUFF_SIZE + 1)))
+	if (!line || fd > 256 || !(tmpl = (char *)malloc(BUFF_SIZE + 1)))
 		return (-1);
 	*line = tmpl;
 	tmp = (tmpbuf[fd] != NULL) ? ft_strdup(tmpbuf[fd]) : NULL;

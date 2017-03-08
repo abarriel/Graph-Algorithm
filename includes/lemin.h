@@ -47,7 +47,8 @@ typedef struct		s_path
 typedef struct		s_ant
 {
 	int				ant;
-	struct s_ant	*next;
+	int  			bonus_color;
+	int  			bonus_path;
 }					t_ant;
 void				handles_path(t_path **p, t_ant *a, int max_path);
 int					check_link(t_room *r, char *s1);
@@ -66,6 +67,6 @@ int					add_tube(t_room **r, char *line);
 t_room				*init_room(char *name, int index);
 void				print_path(t_path *path);
 void				add_back_room(t_room **r, char *name, int index);
-t_ant				*init_ant(char *name);
-void				parser(void);
+t_ant				*init_ant(char *name, int bp, int bc);
+void				parser(int bp, int bc);
 #endif
