@@ -19,6 +19,7 @@ int		if_so_(char conv, char *symb)
 	int		i;
 
 	i = 0;
+	tab = NULL;
 	tmp = NULL;
 	if (symb)
 	{
@@ -27,11 +28,6 @@ int		if_so_(char conv, char *symb)
 	}
 	while (tab[i])
 		i++;
-	if (i == 3)
-	{
-		if (if_so('-', tab[0]))
-			ft_exit("- in the Room's name - Further Explication");
-	}
 	while (symb && *symb)
 	{
 		if (conv == *symb)

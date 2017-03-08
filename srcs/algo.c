@@ -12,16 +12,6 @@
 
 #include "lemin.h"
 
-void	verif(t_room *r)
-{
-	while (r)
-	{
-		if (r->poids == 1)
-			r->poids = 0;
-		r = r->next;
-	}
-}
-
 void	algo_lem__(t_room **r1, t_tube **tmp1, t_room *begin)
 {
 	t_room	*r;
@@ -129,5 +119,5 @@ void	handles_algo(t_room *r, t_ant *a)
 		print_path(path[b]);
 		b++;
 	}
-	// handles_path(path, a);
+	handles_path(path, a, j);
 }

@@ -12,15 +12,6 @@
 
 #include "lemin.h"
 
-char	*ft_name_coord(char *name)
-{
-	char	*str;
-
-	str = "NULL";
-	str = *ft_strsplit(name, ' ');
-	return (str);
-}
-
 t_room	*init_room(char *name, int index)
 {
 	t_room	*r;
@@ -30,7 +21,6 @@ t_room	*init_room(char *name, int index)
 	r->tube = NULL;
 	r->next = NULL;
 	r->y = 0;
-	r->dj = 0;
 	r->x = 0;
 	r->by = 0;
 	r->poids = 0;
@@ -64,6 +54,8 @@ int		parse_error_room(int index, char *n)
 	if_so_('-', n);
 	if (*n == '#')
 		return (0);
+	if (ft_strchr(n,'-') || ft_strchr(n + 1,'#') || *n == 'L')
+		ft_exit("Room can't containt -  # L further explication");
 	if (u == 2 && index == 2)
 		ft_exit("More than one end");
 	if (u == 1 && index == 1)
@@ -72,13 +64,6 @@ int		parse_error_room(int index, char *n)
 	u = (index == 2) ? 2 : u;
 	u = (index == 1) ? 1 : u;
 	return (1);
-}
-
-char	*next_comment(char *name)
-{
-	while (*name == '#')
-		get_next_line(0, &name);
-	return (name);
 }
 
 void	check_if(t_room *r, char *name)

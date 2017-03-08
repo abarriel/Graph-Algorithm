@@ -60,7 +60,7 @@ void	add_back_tube(t_tube **t, t_room *start_r)
 	tmp->prev = prev;
 }
 
-int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
+int		check_tube(t_room *tmp1, t_room *tmp, char *line)
 {
 	int		stop;
 
@@ -77,18 +77,7 @@ int		check_tube(t_room *tmp1, t_room *tmp, char *line, int index)
 	return (stop);
 }
 
-int		check_link(t_room *r, char *s1)
-{
-	while (r)
-	{
-		if (!ft_strcmp(r->name, s1))
-			return (0);
-		r = r->next;
-	}
-	return (1);
-}
-
-int		add_tube(t_room **r, char *line, int index)
+int		add_tube(t_room **r, char *line)
 {
 	t_room	*tmp;
 	t_room	*tmp1;
@@ -110,7 +99,7 @@ int		add_tube(t_room **r, char *line, int index)
 	while (tmp && stop != 1)
 	{
 		if (!ft_strcmp(s[0], tmp->name))
-			stop = check_tube(tmp1, tmp, s[1], index);
+			stop = check_tube(tmp1, tmp, s[1]);
 		tmp = tmp->next;
 	}
 	free(s);

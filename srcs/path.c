@@ -12,32 +12,30 @@
 
 #include "lemin.h"
 
-void	change_r(t_room *r)
+void	save_path_(t_room **rp, t_path **pa, int p)
 {
-	while (r)
+	t_room *r;
+	t_path *path;
+
+	path = *pa;
+	r = *rp;
+	while (r && r->end != 1)
 	{
-		r->by = 0;
-		while (r->tube->next)
+		add_back_path(&path, r->name, r->start, p);
+		if (r->by != 4 && r->tube->room->poids == 1)
 		{
-			if (r->tube->room->poids != 0)
-				r->tube->room->poids = 0;
+			r->by = 4;
+			while (r->tube->room->by == 4 || r->tube->room->poids != 1)
+				r->tube = r->tube->next;
+			r = r->tube->room;
+		}
+		else if (r->by == 4)
 			r->tube = r->tube->next;
-		}
-		while (r->tube->prev)
-			r->tube = r->tube->prev;
-		if (r->start == 1)
-		{
-			r->start = 0;
-			r->end = 1;
-			r->x = 45;
-		}
-		if (r->end == 1 && r->x != 45)
-		{
-			r->end = 0;
-			r->start = 1;
-		}
-		r = r->next;
+		p++;
 	}
+	add_back_path(&path, r->name, r->start, p);
+	*pa = path;
+	*rp = r;
 }
 
 t_path	*save_path(t_room *r, int *i)
@@ -57,48 +55,35 @@ t_path	*save_path(t_room *r, int *i)
 		return (path);
 	}
 	r->by = 0;
-	while (r && r->end != 1)
-	{
-		add_back_path(&path, r->name, p);
-		if (r->by != 4 && r->tube->room->poids == 1)
-		{
-			r->by = 4;
-			while (r->tube->room->by == 4 || r->tube->room->poids != 1)
-				r->tube = r->tube->next;
-			r = r->tube->room;
-		}
-		else if (r->by == 4)
-			r->tube = r->tube->next;
-		p++;
-	}
-	add_back_path(&path, r->name, p);
+	save_path_(&r,&path,p);
 	return (path);
 }
 
-t_path	*init_path(char *name, int p)
+t_path	*init_path(char *name, int start,  int p)
 {
 	t_path	*u;
 
 	if (!(u = (t_path*)malloc(sizeof(t_path))))
 		ft_exit("Failed to Malloc");
 	u->name = name;
+	u->start = start;
 	u->size += p;
 	u->next = NULL;
 	return (u);
 }
 
-void	add_back_path(t_path **t, char *name, int p)
+void	add_back_path(t_path **t, char *name, int start, int p)
 {
 	t_path	*tmp;
 
 	tmp = *t;
 	if (!tmp)
 	{
-		*t = init_path(name, p);
+		*t = init_path(name, start, p);
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_path(name, p);
+	tmp->next = init_path(name, start, p);
 	tmp = tmp->next;
 }

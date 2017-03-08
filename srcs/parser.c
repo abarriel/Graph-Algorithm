@@ -55,7 +55,7 @@ int		check_stopping(t_room *tmp, char *line, int index)
 	return (0);
 }
 
-int		parser(void)
+void	parser(void)
 {
 	char	*line;
 	t_room	*r;
@@ -69,7 +69,7 @@ int		parser(void)
 	{
 		if (*line != '#' && (i = if_so_('-', line)))
 		{
-			if((add_tube(&r, line, i)))
+			if ((add_tube(&r, line)))
 				break ;
 		}
 		else if (!ft_strcmp("##start", line) && get_next_line(0, &line) == 1)
@@ -79,7 +79,5 @@ int		parser(void)
 		else
 			add_back_room(&r, line, 0);
 	}
-	handles_algo(r,a);
-	// handles_path(r,a);
-	return (0);
+	handles_algo(r, a);
 }

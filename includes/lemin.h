@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/19 11:33:01 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/06 08:27:57 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct		s_room
 {
 	char			*name;
 	int				poids;
-	int 			dj;
 	int				by;
 	int				x;
 	int				y;
@@ -31,16 +30,18 @@ typedef struct		s_room
 
 typedef struct		s_tube
 {
-	struct s_tube 	*prev;
+	struct s_tube	*prev;
 	struct s_tube	*next;
 	struct s_room	*room;
 }					t_tube;
 
-typedef struct 		s_path
+typedef struct		s_path
 {
-	char 			*name;
-	int 			size;
-	struct s_path   *next;
+	char			*name;
+	int 			ants;
+	int 			start;
+	int				size;
+	struct s_path	*next;
 }					t_path;
 
 typedef struct		s_ant
@@ -48,18 +49,23 @@ typedef struct		s_ant
 	int				ant;
 	struct s_ant	*next;
 }					t_ant;
-t_path    			*save_path(t_room *r, int *i);
-void				add_back_path(t_path **t, char *name, int p);
+void				handles_path(t_path **p, t_ant *a, int max_path);
+int					check_link(t_room *r, char *s1);
+char				*next_comment(char *name);
+char				*ft_name_coord(char *name);
+void				verif(t_room *r);
+t_path				*save_path(t_room *r, int *i);
+void				add_back_path(t_path **t, char *name, int start, int p);
 void				poids(t_room *r);
-void 				handles_algo(t_room *r, t_ant *a);
+void				handles_algo(t_room *r, t_ant *a);
 void				print_room(t_room *b);
-void 				check_room(t_room *tmp);
-int 				check_stopping(t_room *tmp, char *line, int index);
+void				check_room(t_room *tmp);
+int					check_stopping(t_room *tmp, char *line, int index);
 int					if_so_(char conv, char *symb);
-int 				add_tube(t_room **r, char *line, int index);
+int					add_tube(t_room **r, char *line);
 t_room				*init_room(char *name, int index);
 void				print_path(t_path *path);
-void 				add_back_room(t_room **r, char *name, int index);
+void				add_back_room(t_room **r, char *name, int index);
 t_ant				*init_ant(char *name);
-int					parser(void);
+void				parser(void);
 #endif

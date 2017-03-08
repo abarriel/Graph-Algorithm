@@ -12,13 +12,15 @@
 
 NAME	= lem_in
 
-SRC		= lemin.c parser.c room.c tube.c algo.c print.c path.c
+SRC		= lemin.c parser.c room.c tube.c algo.c print.c path.c tools.c send.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
-CFLAGS	=  -I./includes/ -Ilibft/includes/ 
+INCLUDES = ./includes/lemin.h
 
-$(NAME): $(OBJ)
+CFLAGS	=  -Wall -Wextra  -I./includes/ -Ilibft/includes/ 
+
+$(NAME): $(OBJ) $(INCLUDES)
 	@make -C libft
 	@gcc $(OBJ) -o $(NAME) -L libft/ -lft
 	@echo "Lem-in..."
