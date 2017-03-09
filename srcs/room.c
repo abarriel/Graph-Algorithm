@@ -68,14 +68,9 @@ int		parse_error_room(int index, char *n)
 
 void	check_if(t_room *r, char *name)
 {
-	int i;
-
-	i = 0;
-	while (name[i] != ' ')
-		i++;
 	while (r)
 	{
-		if (!ft_strncmp(r->name, name, i))
+		if (!ft_strcmp(r->name, name))
 			ft_exit("Same Room");
 		r = r->next;
 	}

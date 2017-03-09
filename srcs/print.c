@@ -18,7 +18,9 @@ void	print_path(t_path *path)
 		return ;
 	while (path)
 	{
-		ft_printf("%s ", path->name);
+		ft_printf("%s", path->name);
+		if (path->next)
+			ft_printf("->");
 		path = path->next;
 	}
 	ft_printf("\n\n");
