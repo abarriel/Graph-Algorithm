@@ -113,6 +113,20 @@ void	handles_algo(t_room *r, t_ant *a)
 	j = multi_path(r, a);
 	// ft_printf("{RED}%d",j);
 	path = (t_path **)malloc(sizeof(t_path *) * j);
+		// algo_lem(r);
+		// // path[b] = save_path(r, &i);
+		// // print_path(path[b]);
+		// // print_room(r);
+
+		// algo_lem(r);
+		// // algo_lem(r);
+		// // algo_lem(r);
+		// // algo_lem(r);
+		// // algo_lem(r);
+		// // path[b] = save_path(r, &i);
+		// // print_path(path[b]);
+		// print_room(r);
+		
 	while (i == 0 && b < j)
 	{
 		algo_lem(r);

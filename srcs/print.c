@@ -57,18 +57,18 @@ void	print_room(t_room *r1)
 	while (r)
 	{
 		if (r->start == 1)
-			ft_printf("{RED}%s%s", "S=", r->name);
+			ft_printf("{RED}%s{%s b:%d p:%d}", "S=", r->name, r->by, r->end);
 		else if (r->end == 1)
-			ft_printf("{RED}%s%s", "E=", r->name);
+			ft_printf("{RED}%s{%s b:%d p:%d", "E=", r->name, r->by, r->end);
 		else
-			ft_printf("{GRE}%s", r->name);
+			ft_printf("{GRE}{%s b:%d p:%d}", r->name, r->by, r->poids);
 		if (r->tube == NULL)
 			r = r->next;
 		else
 		{
 			while (r->tube)
 			{
-				ft_printf("{YEL} - %s", r->tube->room->name);
+				ft_printf("{YEL} - {%s b:%d p:%d}", r->tube->room->name,r->tube->room->by,r->tube->room->poids);
 				r->tube = r->tube->next;
 			}
 			r = r->next;

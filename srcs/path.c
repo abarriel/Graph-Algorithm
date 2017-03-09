@@ -45,32 +45,44 @@ void	save_path_(t_room **rp, t_path **pa, int p)
 
 	path = *pa;
 	r = *rp;
-	// ft_printf("{GRE}%s\n", "DEDANS");
 	add_back_path(&path, r->name, r->start, p);
 	// ft_printf("{GRE}[%s]\n", r->name);
 	while (r && r->end != 1)
 	{
-		while (r->tube->room->by == 4 || r->tube->room->poids != 1)
+		// tmp = r->tube;
+		while(r->tube->prev)
+			r->tube = r->tube->prev;
+		while (r->tube->next && (r->tube->room->by == 4 || r->tube->room->poids != 1))
 				r->tube = r->tube->next;
-		// ft_printf("{GRE}[%s]\n", r->name);
+		if(r->tube->room->poids == 0)
+			{
+				// ft_printf("%s",r/÷)
+			}
+		ft_printf("3\n");
+		// ft_printf("{GRE}[%s]\n", r->tube->room->name);
 		if (r->by != 4 && r->tube->room->poids == 1)
 		{
+		ft_printf("4\n");
+
+			ft_printf("{RED}%s\n", "1");
 			if(r->start != 1)
 			add_back_path(&path, r->name, r->start, p);
 			r->by = 4;
-			// ft_printf("{PUR}[%s]\n", r->name);
+			ft_printf("{PUR}[%s]\n", r->name);
 			// while (r->tube->room->by == 4 || r->tube->room->poids != 1)
 			// 	r->tube = r->tube->next;
 			r = r->tube->room;
 		}
 		else
 		{
-			tmp = r->tube;
+			ft_printf("{RED}%s\n", "2");
 			// ft_printf("{RED}[%s]\n", tmp->room->name);
 			// r->tube = r->tube->next;
 			r = r->tube->room;
 			// ft_printf("{YEL}[%s]\n", r->tube->room->name);			
 		}
+		
+	ft_printf("{GRE}%s\n", "DEDANS");
 		p++;
 	}
 	add_back_path(&path, r->name, r->start, p);
@@ -85,7 +97,6 @@ t_path	*save_path(t_room *r, int *i)
 
 	p = 1;
 	path = NULL;
-	// ft_printf("{RED}%s\n", "1");
 	if(!r->tube || !verif_no_path(r))
 	{
 		// ft_printf("{RED}%s\n", "2");
