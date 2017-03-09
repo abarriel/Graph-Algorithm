@@ -81,5 +81,7 @@ void	parser(int bp, int bc)
 		else
 			add_back_room(&r, line, 0);
 	}
+	if (i == 0)
+		ft_exit("No tube");
 	handles_algo(r, a);
 }

@@ -51,7 +51,29 @@ void 	print_ants(int bc, int ants, char *name)
 	ft_printf("L%d-%s ", ants, name);
 	ft_putstr(RESET);
 }
+void 	sort_lists(t_path **p, int max_path)
+{
+	int i;
+	t_path **begin;
+	t_path *tmp;
 
+
+	i = 0;
+	begin = p;
+	tmp = NULL;
+	while(i < max_path)
+	{
+		if (i + 1 < max_path && (p[i]->size > p[i + 1]->size))
+		{
+			tmp = p[i];
+			p[i] = p[i + 1];
+			p[i + 1] = tmp;
+			i = 0;
+		}
+		i++;
+	}
+	p = begin;
+}
 void	handles_path(t_path **p, t_ant *a, int max_path)
 {
 	int i;
@@ -72,6 +94,8 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 		tmp[i] = p[i];
 		i++;
 	}
+	if (max_path > 1)
+	sort_lists(p,max_path);
 	i = 0;
 	while(end <= a->ant)
 	{
@@ -83,6 +107,7 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 				{
 					end++;
 					p[i]->ants = end;
+					ft_printf("[1]");
 					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 					if (end == a->ant)
 						return ;
@@ -93,12 +118,14 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 					start--;
 					ants++;
 					p[i]->ants = ants;
+					ft_printf("[2]");
 					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 				}
 				else if (p[i]->next && p[i]->next->ants > 0 && p[i]->next->start != 1)
 				{
 					p[i]->ants = p[i]->next->ants;
 					p[i]->next->ants = 0;
+					ft_printf("[3]");
 					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
 				}
 				p[i] = p[i]->next;

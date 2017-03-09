@@ -57,7 +57,7 @@ t_ant	*init_ant(char *name, int bp, int bc)
 	return (r);
 }
 
-void 	bonus_lemin(int *bc, int *bp, char **ac, int av)
+void 	bonus_lemin(int *bc, int *bp, char **ac)
 {	
 	int i;
 
@@ -80,7 +80,7 @@ int		main(int ac, char **av)
 	bc = 0;
 	bp = 0;
 	if (ac > 1)
-	bonus_lemin(&bc,&bp,av,ac);
+	bonus_lemin(&bc,&bp,av);
 	parser(bc, bp);
 	return (0);
 }

@@ -91,6 +91,8 @@ int		multi_path(t_room *r, t_ant *a)
 	tmp = r->tube;
 	while (tmp)
 	{
+		if (tmp->room->end == 1)
+			return (1);
 		tmp = tmp->next;
 		tube++;
 	}
@@ -109,12 +111,13 @@ void	handles_algo(t_room *r, t_ant *a)
 	i = 0;
 	b = 0;
 	j = multi_path(r, a);
+	// ft_printf("{RED}%d",j);
 	path = (t_path **)malloc(sizeof(t_path *) * j);
 	while (i == 0 && b < j)
 	{
 		algo_lem(r);
 		path[b] = save_path(r, &i);
-		if (!path[0])
+		if (!path[b])
 			ft_exit("Invalid Path");
 		if(a->bonus_path == 1)
 			print_path(path[b]);
