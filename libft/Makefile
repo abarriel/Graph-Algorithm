@@ -2,7 +2,7 @@
 NAME = libft.a
 
 #	GCC flags
-CFLAGS = -Werror
+#CFLAGS = -Werror
 ALL_CFLAGS = -Wall -Wextra $(CFLAGS)
 
 # Includes directories

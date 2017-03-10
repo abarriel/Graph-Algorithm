@@ -27,7 +27,7 @@ void	verif(t_room *r)
 {
 	while (r)
 	{
-		if (r->poids == 1)
+		if (r->poids == 1 && r->by != 4)
 			r->poids = 0;
 		r = r->next;
 	}

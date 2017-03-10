@@ -112,17 +112,13 @@ void	handles_algo(t_room *r, t_ant *a)
 	b = 0;
 	j = multi_path(r, a);
 	// ft_printf("{RED}%d",j);
-	path = (t_path **)malloc(sizeof(t_path *) * j);
+		path = (t_path **)malloc(sizeof(t_path *) * j);
 		// algo_lem(r);
-		// // path[b] = save_path(r, &i);
+		// path[b] = save_path(r, &i);
 		// // print_path(path[b]);
-		// // print_room(r);
-
-		// algo_lem(r);
 		// // algo_lem(r);
-		// // algo_lem(r);
-		// // algo_lem(r);
-		// // algo_lem(r);
+		// // while(r->tube->prev)
+		// // 	r->tube = r->tube->prev;
 		// // path[b] = save_path(r, &i);
 		// // print_path(path[b]);
 		// print_room(r);
@@ -132,10 +128,17 @@ void	handles_algo(t_room *r, t_ant *a)
 		algo_lem(r);
 		path[b] = save_path(r, &i);
 		if (!path[b])
-			ft_exit("Invalid Path");
-		if(a->bonus_path == 1)
+		{
+			j = b;
+			break;
+			// ft_exit("Invalid Path");
+		}
+		else if(a->bonus_path == 1)
 			print_path(path[b]);
 		b++;
 	}
+	if (!(path[0]))
+		ft_exit("Invalid Path");
+	ft_printf("{RED}%d,%d,%d",i,b,j);
 	handles_path(path, a, j);
 }

@@ -87,7 +87,7 @@ void 	sort_lists(t_path **p, int *max_path)
 		}
 		i++;
 	}
-	p = begin;
+	// p = begin;
 }
 void	handles_path(t_path **p, t_ant *a, int max_path)
 {
