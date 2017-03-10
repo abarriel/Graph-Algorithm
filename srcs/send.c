@@ -19,7 +19,7 @@ void	reverse_list(t_path **list, t_ant *a)
 	t_path	*r;
 
 	p = *list;
-	p->ants = a->ant;
+	p->r->ants = a->ant;
 	q = NULL;
 	while (p)
 	{
@@ -28,7 +28,7 @@ void	reverse_list(t_path **list, t_ant *a)
 		p = p->next;
 		q->next = r;
 	}
-	q->start = 2;
+	// q->start = 2;
 	*list = q;
 }
 
@@ -74,20 +74,20 @@ void 	sort_lists(t_path **p, int *max_path)
 	}
 	i = 0;
 	p = begin;
-	while(i < *(max_path))
-	{
-		if (i + 1 < *(max_path) && (p[i + 1]->size > (p[0]->size + 2)))
-		{
-			*(max_path) = i + 1;
-			p[i + 1] = NULL;
-			p = begin;
-			return ;
-			// free(p[i + 1]);
-			// i = 0;
-		}
-		i++;
-	}
-	// p = begin;
+	// while(i < *(max_path))
+	// {
+	// 	if (i + 1 < *(max_path) && (p[i + 1]->size > (p[0]->size + 2)))
+	// 	{
+	// 		*(max_path) = i + 1;
+	// 		p[i + 1] = NULL;
+	// 		p = begin;
+	// 		return ;
+	// 		// free(p[i + 1]);
+	// 		// i = 0;
+	// 	}
+	// 	i++;
+	// }
+	// // p = begin;
 }
 void	handles_path(t_path **p, t_ant *a, int max_path)
 {
@@ -106,56 +106,66 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 	while(i < max_path)
 	{	
 		reverse_list(&p[i],a);
-		// tmp[i] = p[i];
-		i++;
-	}
-	if (max_path > 1)
-	sort_lists(p,&max_path);
-	i = 0;
-	ft_printf("\n\n");
-	while(i <= max_path)
-	{
 		tmp[i] = p[i];
 		i++;
 	}
+	// if (max_path > 1)
+	// sort_lists(p,&max_path);
+	// i = 0;
+	// ft_printf("\n\n");
+	// while(i <= max_path)
+	// {
+	// 	tmp[i] = p[i];
+	// 	i++;
+	// }
 	i = 0;
-	while(end <= a->ant)
+	ft_printf("%d",max_path);	
+	while (p[i]->r->ants <= a->ant)
 	{
-		while(i < max_path)
+		while (i < max_path)
 		{
-			while(p[i])
+			while (p[i])
 			{
-				if (p[i]->start == 2 && p[i]->next->ants > 0)
+				if (p[i]->r->end == 1 && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
 				{
-					end++;
-					p[i]->ants = end;
-					// ft_printf("[1]");
-					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
-					if (end == a->ant)
-						return ;
+					// ft_printf("[%d - %d - %s - %s]",p[i]->next->r->ants,p[i]->r->ants, p[i]->next->r->name, p[i]->r->name);
+					// p[i]->r->ants++;
+					p[i]->r->ants = p[i]->next->r->ants;
+					// ft_printf("[%d - %d - %s - %s]",p[i]->next->r->ants,p[i]->r->ants, p[i]->next->r->name, p[i]->r->name);
+
+					p[i]->next->r->ants =0;
+					// ft_printf("[4]");
+					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
+					// if (p[i]->r->ants == a->ant)
+					// 	return ;
 				}
-				else if (p[i]->next && p[i]->next->start == 1 && start > 0)
+				else if (p[i]->next && p[i]->next->r->start == 1 && start > 0)
 				{
-					p[i]->next->ants--;
+					p[i]->next->r->ants--;
 					start--;
 					ants++;
-					p[i]->ants = ants;
+					p[i]->r->ants = ants;
 					// ft_printf("[2]");
-					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
+					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
+					// ft_printf("[5]");
 				}
-				else if (p[i]->next && p[i]->next->ants > 0 && p[i]->next->start != 1)
+				else if (p[i]->next && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
 				{
-					p[i]->ants = p[i]->next->ants;
-					p[i]->next->ants = 0;
+					// ft_printf("[6]");
+					p[i]->r->ants = p[i]->next->r->ants;
+					p[i]->next->r->ants = 0;
 					// ft_printf("[3]");
-					print_ants(a->bonus_color, p[i]->ants,p[i]->name);
+					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
 				}
 				p[i] = p[i]->next;
+				// ft_printf("[8]");
 			}
+			// ft_printf("[9]");
 			p[i] = tmp[i];
 			i++;
+			if(p[0]->r->ants == a->ant)
+				return ;
 		}
-		
 		i = 0;
 		ft_printf("\n");
 		p[i] = tmp[i];

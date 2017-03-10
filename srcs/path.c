@@ -23,7 +23,7 @@ int verif_no_path(t_room *r)
 	tube = r->tube;
 	while(r->tube)
 	{
-		ft_printf("{GRE}[%s by= %d p= %d]\n",r->tube->room->name,r->tube->room->by,r->tube->room->poids);
+		// ft_printf("{GRE}[%s by= %d p= %d]\n",r->tube->room->name,r->tube->room->by,r->tube->room->poids);
 		if (r->tube->room->by != 4)
 			i++;
 		r->tube = r->tube->next;
@@ -45,44 +45,27 @@ void	save_path_(t_room **rp, t_path **pa, int p)
 
 	path = *pa;
 	r = *rp;
-	add_back_path(&path, r->name, r->start, p);
-
+	add_back_path(&path, r, p);
 	while (r && r->end != 1)
 	{
-		// tmp = r->tube;
-		// while(r->tube->prev)
-		// 	r->tube = r->tube->prev;
 		while (r->tube && (r->tube->room->by == 4 || r->tube->room->poids != 1))
 		{
-			// ft_printf("{GRE}[%s - %d - %d]\n", r->tube->room->name,r->tube->room->by,r->tube->room->poids);
 				r->tube = r->tube->next;
 		}
-		// if(!r->tube->next)
-		// 	{
-		// 		ft_printf("{GRE}[%s - %d - %d]\n", r->tube->next->room->name,r->tube->next->room->by,r->tube->next->room->poids);
-		// 		exit(1);
-		// 	}
 		if (r->by != 4 && r->tube->room->poids == 1)
 		{ 
-			// ft_printf("{RED}[r=%s - %s - %d - %d]\n",r->name,r->tube->room->name,r->tube->room->by,r->tube->room->poids);
 			if(r->start != 1)
-				add_back_path(&path, r->name, r->start, p);
+				add_back_path(&path, r, p);
 			r->by = 4;
-			// ft_printf("{PUR}[%s]\n", r->name);
-			// while (r->tube->room->by == 4 || r->tube->room->poids != 1)
-			// 	r->tube = r->tube->next;
 			r = r->tube->room;
 		}
 		else
 		{
-			// ft_printf("{RED}[%s]\n", tmp->room->name);
-			// r->tube = r->tube->next;
 			r = r->tube->room;
-			// ft_printf("{YEL}[%s]\n", r->tube->room->name);			
 		}
 	p++;
 	}
-	add_back_path(&path, r->name, r->start, p);
+	add_back_path(&path, r, p);
 	*pa = path;
 	*rp = r;
 }
@@ -94,44 +77,41 @@ t_path	*save_path(t_room *r, int *i)
 
 	p = 1;
 	path = NULL;
-	ft_printf("1");
 	if(!r->tube || !verif_no_path(r))
 	{
 		(*i)++;
-		ft_printf("3");
 		return (path);
 	}
-	ft_printf("2");
+	// ft_printf("2");
 	save_path_(&r,&path,p);
 	return (path);
 }
 
-t_path	*init_path(char *name, int start,  int p)
+t_path	*init_path(t_room *r,  int p)
 {
 	t_path	*u;
 
 	if (!(u = (t_path*)malloc(sizeof(t_path))))
 		ft_exit("Failed to Malloc");
-	u->name = name;
-	u->ants = 0;
-	u->start = start;
+	u->r = r;
+	u->name = r->name;
 	u->size = p;
 	u->next = NULL;
 	return (u);
 }
 
-void	add_back_path(t_path **t, char *name, int start, int p)
+void	add_back_path(t_path **t, t_room *r, int p)
 {
 	t_path	*tmp;
 
 	tmp = *t;
 	if (!tmp)
 	{
-		*t = init_path(name, start, p);
+		*t = init_path(r, p);
 		return ;
 	}
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = init_path(name, start, p);
+	tmp->next = init_path(r, p);
 	tmp = tmp->next;
 }

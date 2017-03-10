@@ -24,6 +24,7 @@ t_room	*init_room(char *name, int index)
 	r->x = 0;
 	r->by = 0;
 	r->poids = 0;
+	r->ants = 0;
 	r->name = ft_name_coord(name);
 	r->start = (index == 1) ? 1 : 0;
 	r->end = (index == 2) ? 1 : 0;

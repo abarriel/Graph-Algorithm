@@ -47,14 +47,14 @@ static int	gnl_read(int const fd, char *tmpline, char *tmpbuf[0], char **line)
 	}
 	i = (tmpline[0] != '\0') ? 1 : 0;
 	i = (ret < 0) ? -1 : i;
-	// ft_printf("%s\n", *line);
+	ft_printf("%s\n", *line);
 	return (i);
 }
 
 void		normi(char **tmpbuf, char *tmp1, char *line)
 {
 	*tmpbuf = ft_strdup(tmp1);
-	// ft_printf("%s\n", line);
+	ft_printf("%s\n", line);
 }
 
 int			get_next_line(int const fd, char **line)

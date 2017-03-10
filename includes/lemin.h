@@ -24,6 +24,7 @@ typedef struct		s_room
 	int				y;
 	int				start;
 	int				end;
+	int 			ants;
 	struct s_tube	*tube;
 	struct s_room	*next;
 }					t_room;
@@ -38,8 +39,7 @@ typedef struct		s_tube
 typedef struct		s_path
 {
 	char			*name;
-	int 			ants;
-	int 			start;
+	struct s_room   *r;
 	int				size;
 	struct s_path	*next;
 }					t_path;
@@ -50,13 +50,13 @@ typedef struct		s_ant
 	int  			bonus_color;
 	int  			bonus_path;
 }					t_ant;
+void				add_back_path(t_path **t, t_room *r, int p);
 void				handles_path(t_path **p, t_ant *a, int max_path);
 int					check_link(t_room *r, char *s1);
 char				*next_comment(char *name);
 char				*ft_name_coord(char *name);
 void				verif(t_room *r);
 t_path				*save_path(t_room *r, int *i);
-void				add_back_path(t_path **t, char *name, int start, int p);
 void				poids(t_room *r);
 void				handles_algo(t_room *r, t_ant *a);
 void				print_room(t_room *b);
