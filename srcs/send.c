@@ -127,33 +127,36 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 			while (p[i])
 			{
 			// ft_printf("#%d#",end); QUAND START ET END COLER C LE BORDEL JAI REPAERE LE END CAR IL SINCRIMENTER AVEC LE NOMBRE DE FOURMI ALORS QUE C NB DE FOI QUNE FOURMIS ET ARRIVER A END
-				if (p[i]->r->end == 1 && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
-				{
-					// p[i]->r->ants++;
-					p[i]->r->ants = p[i]->next->r->ants;
-					p[i]->next->r->ants =0;
-					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
-					end++;
-			// ft_printf("{%d}",end);
-					if (end == a->ant)
-						return ;
-				}
-				else if (p[i]->next && p[i]->next->r->start == 1 && start > 0)
+			// 	if (p[i]->r->end == 1 && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
+			// 	{
+			// 		// p[i]->r->ants++;
+			// 		p[i]->r->ants = p[i]->next->r->ants;
+			// 		p[i]->next->r->ants =0;
+			// 		print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
+			// 		end++;
+			// // ft_printf("{%d}",end);
+			// 		if (end == a->ant)
+			// 			return ;
+			// 	}
+				if (p[i]->next && p[i]->next->r->start == 1 && start > 0)
 				{
 					p[i]->next->r->ants--;
 					start--;
 					ants++;
 					p[i]->r->ants = ants;
+						if(p[i]->r->end == 1)
+						end++;
 			// ft_printf("(%d)",end);
 					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
 				}
 				else if (p[i]->next && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
 				{
-			ft_printf("*%d*",end);
 
 					p[i]->r->ants = p[i]->next->r->ants;
 					p[i]->next->r->ants = 0;
 					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
+					if(p[i]->r->end == 1)
+						end++;
 				}
 				p[i] = p[i]->next;
 				if(end == a->ant)
@@ -163,7 +166,7 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 				if (p[i]->r->start == 1 && p[i]->next->r->end == 1)
 					end++;
 			i++;
-			ft_printf("[%d]",end);
+			// ft_printf("[%d]",end);
 			if(end == a->ant)
 				return ;
 		}
