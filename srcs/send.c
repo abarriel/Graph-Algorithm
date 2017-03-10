@@ -120,24 +120,23 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 	// }
 	i = 0;
 	ft_printf("%d",max_path);	
-	while (p[i]->r->ants <= a->ant)
+	while (end != a->ant)
 	{
 		while (i < max_path)
 		{
 			while (p[i])
 			{
+			// ft_printf("#%d#",end); QUAND START ET END COLER C LE BORDEL JAI REPAERE LE END CAR IL SINCRIMENTER AVEC LE NOMBRE DE FOURMI ALORS QUE C NB DE FOI QUNE FOURMIS ET ARRIVER A END
 				if (p[i]->r->end == 1 && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
 				{
-					// ft_printf("[%d - %d - %s - %s]",p[i]->next->r->ants,p[i]->r->ants, p[i]->next->r->name, p[i]->r->name);
 					// p[i]->r->ants++;
 					p[i]->r->ants = p[i]->next->r->ants;
-					// ft_printf("[%d - %d - %s - %s]",p[i]->next->r->ants,p[i]->r->ants, p[i]->next->r->name, p[i]->r->name);
-
 					p[i]->next->r->ants =0;
-					// ft_printf("[4]");
 					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
-					// if (p[i]->r->ants == a->ant)
-					// 	return ;
+					end++;
+			// ft_printf("{%d}",end);
+					if (end == a->ant)
+						return ;
 				}
 				else if (p[i]->next && p[i]->next->r->start == 1 && start > 0)
 				{
@@ -145,30 +144,31 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 					start--;
 					ants++;
 					p[i]->r->ants = ants;
-					// ft_printf("[2]");
+			// ft_printf("(%d)",end);
 					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
-					// ft_printf("[5]");
 				}
 				else if (p[i]->next && p[i]->next->r->ants > 0 && p[i]->next->r->start != 1)
 				{
-					// ft_printf("[6]");
+			ft_printf("*%d*",end);
+
 					p[i]->r->ants = p[i]->next->r->ants;
 					p[i]->next->r->ants = 0;
-					// ft_printf("[3]");
 					print_ants(a->bonus_color, p[i]->r->ants,p[i]->name);
 				}
 				p[i] = p[i]->next;
-				// ft_printf("[8]");
+				if(end == a->ant)
+				return ;
 			}
-			// ft_printf("[9]");
 			p[i] = tmp[i];
+				if (p[i]->r->start == 1 && p[i]->next->r->end == 1)
+					end++;
 			i++;
-			if(p[0]->r->ants == a->ant)
+			ft_printf("[%d]",end);
+			if(end == a->ant)
 				return ;
 		}
 		i = 0;
 		ft_printf("\n");
 		p[i] = tmp[i];
-		// i++;
 	}
 }
