@@ -52,6 +52,9 @@ t_ant	*init_ant(char *name, int bp, int bc)
 	if (!(r = (t_ant*)malloc(sizeof(t_ant))))
 		ft_exit("Failed to Malloc");
 	r->ant = i;
+	r->start = r->ant;
+	r->end = 0;
+	r->dant = 0;
 	r->bonus_color = bc;
 	r->bonus_path = bp;
 	return (r);

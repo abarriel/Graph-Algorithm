@@ -47,9 +47,14 @@ typedef struct		s_path
 typedef struct		s_ant
 {
 	int				ant;
+	int 			start;
+	int 			end;
+	int 			dant;
 	int  			bonus_color;
 	int  			bonus_path;
 }					t_ant;
+void				reverse_list(t_path **list, t_ant *a);
+void				print_ants(int bc, int ants, char *name);
 void				add_back_path(t_path **t, t_room *r, int p);
 void				handles_path(t_path **p, t_ant *a, int max_path);
 int					check_link(t_room *r, char *s1);

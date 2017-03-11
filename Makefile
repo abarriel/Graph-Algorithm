@@ -18,7 +18,7 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ./includes/lemin.h
 
-CFLAGS	=  -Wall -Wextra -I./includes/ -Ilibft/includes/ 
+CFLAGS	=  -Wall -Wextra -Werror -I./includes/ -Ilibft/includes/ 
 
 $(NAME): $(OBJ) $(INCLUDES)
 	@make -C libft

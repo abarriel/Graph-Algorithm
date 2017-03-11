@@ -39,7 +39,6 @@ int		verif_no_path(t_room *r)
 void	save_path_(t_room **rp, t_path **pa, int p)
 {
 	t_room	*r;
-	t_tube	*tmp;
 	t_path	*path;
 
 	path = *pa;
