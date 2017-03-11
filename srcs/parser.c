@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:15 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/23 16:57:46 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/11 07:57:13 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	parser(int bp, int bc)
 
 	i = 0;
 	r = NULL;
-	line = NULL;
 	get_next_line(0, &line);
 	a = init_ant(line, bp, bc);
 	while (get_next_line(0, &line) > 0)
@@ -81,7 +80,6 @@ void	parser(int bp, int bc)
 		else
 			add_back_room(&r, line, 0);
 	}
-	if (i == 0)
-		ft_exit("No tube");
+	(i == 0) ? ft_exit("No tube") : NULL;
 	handles_algo(r, a);
 }

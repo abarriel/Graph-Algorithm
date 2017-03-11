@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 16:52:46 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/06 07:17:00 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/11 07:49:22 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,7 @@ void	handles_algo(t_room *r, t_ant *a)
 	i = 0;
 	b = 0;
 	j = multi_path(r, a);
-	// ft_printf("{RED}%d",j);
-		path = (t_path **)malloc(sizeof(t_path *) * j);
+	path = (t_path **)malloc(sizeof(t_path *) * j);
 	while (i == 0 && b < j)
 	{
 		algo_lem(r);
@@ -120,14 +119,13 @@ void	handles_algo(t_room *r, t_ant *a)
 		if (!path[b])
 		{
 			j = b;
-			break;
+			break ;
 		}
-		else if(a->bonus_path == 1)
+		else if (a->bonus_path == 1)
 			print_path(path[b]);
 		b++;
 	}
 	if (!(path[0]))
 		ft_exit("Invalid Path");
-	// ft_printf("{RED}%d,%d,%d",i,b,j);
 	handles_path(path, a, j);
 }

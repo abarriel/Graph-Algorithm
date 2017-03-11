@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/06 07:41:01 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/11 08:04:23 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		parse_error_room(int index, char *n)
 	if_so_('-', n);
 	if (*n == '#')
 		return (0);
-	if (ft_strchr(n,'-') || ft_strchr(n + 1,'#') || *n == 'L')
+	if (ft_strchr(n, '-') || ft_strchr(n + 1, '#') || *n == 'L')
 		ft_exit("Room can't containt -  # L further explication");
 	if (u == 2 && index == 2)
 		ft_exit("More than one end");

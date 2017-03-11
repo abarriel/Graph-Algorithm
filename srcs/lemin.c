@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:32:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/02/23 16:55:57 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/11 07:50:51 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		if_so_(char conv, char *symb)
 
 t_ant	*init_ant(char *name, int bp, int bc)
 {
-	t_ant		*r;
-	long		i;
+	t_ant	*r;
+	long	i;
 
 	while (ft_strcmp(name, "##start") &&
 			ft_strcmp(name, "##end") && *name == '#')
@@ -57,30 +57,30 @@ t_ant	*init_ant(char *name, int bp, int bc)
 	return (r);
 }
 
-void 	bonus_lemin(int *bc, int *bp, char **ac)
-{	
-	int i;
+void	bonus_lemin(int *bc, int *bp, char **ac)
+{
+	int	i;
 
 	i = 1;
-	while(ac[i])
+	while (ac[i])
 	{
-		if (ft_strcmp("-c",ac[i]) == 0)
-				(*bp)++;
-		else if(ft_strcmp("-p",ac[i]) == 0)
-				(*bc)++;
+		if (ft_strcmp("-c", ac[i]) == 0)
+			(*bp)++;
+		else if (ft_strcmp("-p", ac[i]) == 0)
+			(*bc)++;
 		i++;
 	}
 }
 
 int		main(int ac, char **av)
 {
-	int bc;
-	int bp;
+	int	bc;
+	int	bp;
 
 	bc = 0;
 	bp = 0;
 	if (ac > 1)
-	bonus_lemin(&bc,&bp,av);
+		bonus_lemin(&bc, &bp, av);
 	parser(bc, bp);
 	return (0);
 }
