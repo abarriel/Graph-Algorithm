@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 08:04:23 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:26:50 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,20 @@ void	parse_error_coord(char *s)
 int		parse_error_room(int index, char *n)
 {
 	static int	u = 0;
+	int			i;
 
+	i = 0;
 	if_so_('-', n);
 	if (*n == '#')
 		return (0);
-	if (ft_strchr(n, '-') || ft_strchr(n + 1, '#') || *n == 'L')
-		ft_exit("Room can't containt -  # L further explication");
+	while (n[i] && n[i] != ' ')
+	{
+		if (n[i] == '-')
+			ft_exit("Room cant containt -  # L further explication");
+		i++;
+	}
+	if (ft_strchr(n + 1, '#') || *n == 'L')
+		ft_exit("Room cant containt -  # L further explication");
 	if (u == 2 && index == 2)
 		ft_exit("More than one end");
 	if (u == 1 && index == 1)
@@ -69,12 +77,21 @@ int		parse_error_room(int index, char *n)
 
 void	check_if(t_room *r, char *name)
 {
+	size_t	i;
+	char	*tmp;
+
+	i = 0;
+	while (name[i] && name[i] != ' ')
+		i++;
+	tmp = ft_strsub(name, 0, i);
 	while (r)
 	{
-		if (!ft_strcmp(r->name, name))
+		if (!ft_strcmp(r->name, tmp))
 			ft_exit("Same Room");
 		r = r->next;
 	}
+	if (tmp)
+		free(tmp);
 }
 
 void	add_back_room(t_room **r, char *name, int index)
@@ -82,7 +99,7 @@ void	add_back_room(t_room **r, char *name, int index)
 	t_room	*tmp;
 
 	if (index == 1 || index == 2)
-		name = next_comment(name);
+		name = next_comment(name, &index);
 	if (!(parse_error_room(index, name)))
 		return ;
 	check_if(*r, name);

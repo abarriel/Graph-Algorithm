@@ -102,6 +102,5 @@ int		add_tube(t_room **r, char *line)
 			stop = check_tube(tmp1, tmp, s[1]);
 		tmp = tmp->next;
 	}
-	free(s);
 	return (stop);
 }

@@ -1,0 +1,10 @@
+10
+##command1
+##end
+room1 1 1
+room2 2 2
+##start
+room3 3 3
+##command2
+room3-room2
+room2-room1

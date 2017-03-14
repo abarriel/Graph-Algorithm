@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 08:18:05 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 10:14:53 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:27:32 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	reverse_list(t_path **list, t_ant *a)
 		p = p->next;
 		q->next = r;
 	}
+	a->n_end = q->name;
 	*list = q;
 }
 
@@ -48,16 +49,31 @@ void	verif(t_room *r)
 	{
 		if (r->poids == 1 && r->by != 4)
 			r->poids = 0;
+		if (r->by == 4)
+			r->poids = 2;
 		r = r->next;
 	}
 }
 
-char	*next_comment(char *name)
+char	*next_comment(char *name, int *index)
 {
+	int	i;
+
+	i = 0;
 	while (*name == '#')
+	{
+		if (!ft_strcmp(name, "##start"))
+			(*index) = 1;
+		else if (!ft_strcmp(name, "##end"))
+			(*index) = 2;
 		get_next_line(0, &name);
-	if (ft_strchr(name, '-'))
-		ft_exit("Room can't containt - further explication");
+	}
+	while (name[i] && name[i] != ' ')
+	{
+		if (name[i] == '-')
+			ft_exit("Room can't containt - further explication");
+		i++;
+	}
 	if (*name == 'L' || *name == '#')
 		ft_exit("Room can't start with L and #");
 	return (name);

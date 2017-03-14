@@ -1,0 +1,9 @@
+10
+##end
+room1 1 1
+room2 2 2
+##start
+room3 3 3
+#what a great output !
+room3-room2
+room2-room1

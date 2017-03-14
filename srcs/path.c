@@ -23,7 +23,7 @@ int		verif_no_path(t_room *r)
 	tube = r->tube;
 	while (r->tube)
 	{
-		if (r->tube->room->by != 4)
+		if (r->tube->room->by != 4 && r->tube->room->poids != 2)
 			i++;
 		r->tube = r->tube->next;
 	}

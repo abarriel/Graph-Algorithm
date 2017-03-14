@@ -69,13 +69,13 @@ void	handles_path_(t_path **tmp, int *ii, t_path **p, t_ant *a)
 			a->dant++;
 			p[i]->r->ants = a->dant;
 			a->end += (p[i]->r->end == 1) ? 1 : 0;
-			print_ants(a->bonus_color, p[i]->r->ants, p[i]->name);
+			print_ants(a, p[i]->r->ants, p[i]->name);
 		}
 		else if (p[i]->next && p[i]->next->r->ants > 0)
 		{
 			p[i]->r->ants = p[i]->next->r->ants;
 			p[i]->next->r->ants = 0;
-			print_ants(a->bonus_color, p[i]->r->ants, p[i]->name);
+			print_ants(a, p[i]->r->ants, p[i]->name);
 			a->end += (p[i]->r->end == 1) ? 1 : 0;
 		}
 		p[i] = p[i]->next;

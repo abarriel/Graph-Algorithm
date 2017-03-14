@@ -39,14 +39,19 @@ int		if_so_(char conv, char *symb)
 
 t_ant	*init_ant(char *name, int bp, int bc)
 {
-	t_ant	*r;
-	long	i;
+	t_ant		*r;
+	long		i;
+	static int	a = -1;
 
 	while (ft_strcmp(name, "##start") &&
 			ft_strcmp(name, "##end") && *name == '#')
 		get_next_line(0, &name);
+	while (name[++a])
+	{
+		if (name[a] != '\0' && (name[a] < 48 || name[a] > 57))
+			ft_exit("Wrong ant's numbers");
+	}
 	i = ft_atol(name);
-	ft_printf("%s\n");
 	if (i <= 0 || !name || i > INT_MAX)
 		ft_exit("Wrong ant's numbers");
 	if (!(r = (t_ant*)malloc(sizeof(t_ant))))
@@ -71,6 +76,8 @@ void	bonus_lemin(int *bc, int *bp, char **ac)
 			(*bp)++;
 		else if (ft_strcmp("-p", ac[i]) == 0)
 			(*bc)++;
+		else
+			ft_exit("error args");
 		i++;
 	}
 }

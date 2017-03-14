@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/06 08:27:57 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/11 10:21:03 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_room
 	int				y;
 	int				start;
 	int				end;
-	int 			ants;
+	int				ants;
 	struct s_tube	*tube;
 	struct s_room	*next;
 }					t_room;
@@ -39,7 +39,7 @@ typedef struct		s_tube
 typedef struct		s_path
 {
 	char			*name;
-	struct s_room   *r;
+	struct s_room	*r;
 	int				size;
 	struct s_path	*next;
 }					t_path;
@@ -47,18 +47,22 @@ typedef struct		s_path
 typedef struct		s_ant
 {
 	int				ant;
-	int 			start;
-	int 			end;
-	int 			dant;
-	int  			bonus_color;
-	int  			bonus_path;
+	int				start;
+	int				end;
+	char			*n_end;
+	int				dant;
+	int				bonus_color;
+	int				bonus_path;
 }					t_ant;
+int					check_stop(t_tube *r);
+int					verif_no(t_room *tmp);
+int					multi_path(t_room *r, t_ant *a);
 void				reverse_list(t_path **list, t_ant *a);
-void				print_ants(int bc, int ants, char *name);
+void				print_ants(t_ant *a, int ants, char *name);
 void				add_back_path(t_path **t, t_room *r, int p);
 void				handles_path(t_path **p, t_ant *a, int max_path);
 int					check_link(t_room *r, char *s1);
-char				*next_comment(char *name);
+char				*next_comment(char *name, int *index);
 char				*ft_name_coord(char *name);
 void				verif(t_room *r);
 t_path				*save_path(t_room *r, int *i);

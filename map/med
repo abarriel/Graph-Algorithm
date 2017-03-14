@@ -1,0 +1,33 @@
+10
+##start
+r0 1 1
+r1 1 1
+r2 1 1
+r3 1 1
+##end
+r4 1 1
+r5 1 1
+r6 1 1
+r7 1 1
+r0-r1
+r0-r5
+r1-r2
+r1-r7
+r2-r3
+r3-r4
+r4-r7
+r7-r6
+r6-r5
+
+L1-r1 
+L1-r7 L2-r1 
+L1-r4 L2-r7 L3-r1 
+L2-r4 L3-r7 L4-r1 
+L3-r4 L4-r7 L5-r1 
+L4-r4 L5-r7 L6-r1 
+L5-r4 L6-r7 L7-r1 
+L6-r4 L7-r7 L8-r1 
+L7-r4 L8-room L9-room 
+L8-r4 L999-r7 L999-r1 
+L9-r4 L10-r7 
+L10-r4 

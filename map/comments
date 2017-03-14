@@ -1,11 +1,36 @@
 3
+#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game#the
+#game3
 #you
 ##start
 start 0 0
 #lost
 ##end
+ed 1 1
+##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1##end
+ed 1 1
 end 1 1
+mid 1 1
 #the
 #game
-start-end
+start-mid
+mid-end
+end-e
 #!!

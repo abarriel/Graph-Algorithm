@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 16:52:46 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 07:49:22 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/13 14:24:31 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	algo_lem__(t_room **r1, t_tube **tmp1, t_room *begin)
 	if (!r->tube)
 	{
 		r->poids = 2;
+		r->tube = tmp;
 		verif(begin);
 		r = begin;
 	}
@@ -51,6 +52,22 @@ int		algo_lem_(t_room **r1, t_tube **tmp1, t_room *begin)
 	return (1);
 }
 
+int		algo_lem___(t_tube **tmp, t_room **r)
+{
+	while ((*tmp))
+	{
+		(*tmp)->room->end = ((*tmp)->room->by == 4) ? 2 : (*tmp)->room->end;
+		if ((*tmp)->room->end == 1)
+		{
+			(*r) = (*tmp)->room;
+			(*r)->poids = 1;
+			return (0);
+		}
+		(*tmp) = (*tmp)->next;
+	}
+	return (1);
+}
+
 void	algo_lem(t_room *r)
 {
 	t_tube	*tmp;
@@ -60,45 +77,20 @@ void	algo_lem(t_room *r)
 	while (r->start != 1 && r)
 		r = r->next;
 	r->poids = 1;
+	if (!check_stop(r->tube))
+		return ;
 	while (r->end != 1)
 	{
+		if (!verif_no(begin))
+			return ;
 		tmp = r->tube;
-		while (tmp)
-		{
-			if (tmp->room->end == 1)
-			{
-				r = tmp->room;
-				r->poids = 1;
-				return ;
-			}
-			tmp = tmp->next;
-		}
+		if (!algo_lem___(&tmp, &r))
+			return ;
 		tmp = r->tube;
 		if (!algo_lem_(&r, &tmp, begin))
 			return ;
 	}
 	return ;
-}
-
-int		multi_path(t_room *r, t_ant *a)
-{
-	int		tube;
-	t_tube	*tmp;
-
-	tube = 0;
-	while (r && r->start != 1)
-		r = r->next;
-	tmp = r->tube;
-	while (tmp)
-	{
-		if (tmp->room->end == 1)
-			return (1);
-		tmp = tmp->next;
-		tube++;
-	}
-	if (a->ant < tube)
-		tube = a->ant;
-	return (tube);
 }
 
 void	handles_algo(t_room *r, t_ant *a)
@@ -109,10 +101,11 @@ void	handles_algo(t_room *r, t_ant *a)
 	int		j;
 
 	i = 0;
-	b = 0;
-	j = multi_path(r, a);
+	b = -1;
+	if (!(j = multi_path(r, a)))
+		ft_exit("Invalid Path");
 	path = (t_path **)malloc(sizeof(t_path *) * j);
-	while (i == 0 && b < j)
+	while (i == 0 && ++b < j)
 	{
 		algo_lem(r);
 		path[b] = save_path(r, &i);
@@ -123,7 +116,6 @@ void	handles_algo(t_room *r, t_ant *a)
 		}
 		else if (a->bonus_path == 1)
 			print_path(path[b]);
-		b++;
 	}
 	if (!(path[0]))
 		ft_exit("Invalid Path");

@@ -6,7 +6,7 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 22:07:24 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/06 07:51:00 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/14 22:53:24 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	gnl_read(int const fd, char *tmpline, char *tmpbuf[0], char **line)
 	}
 	i = (tmpline[0] != '\0') ? 1 : 0;
 	i = (ret < 0) ? -1 : i;
-	ft_printf("%s\n", *line);
 	return (i);
 }
 
@@ -68,7 +67,6 @@ int			get_next_line(int const fd, char **line)
 		return (-1);
 	*line = tmpl;
 	tmp = (tmpbuf[fd] != NULL) ? ft_strdup(tmpbuf[fd]) : NULL;
-	ft_bzero(tmpl, BUFF_SIZE);
 	i = 0;
 	while (tmp != NULL && tmp[i] != '\0')
 	{
@@ -83,5 +81,6 @@ int			get_next_line(int const fd, char **line)
 	tmpbuf[fd] = &tmp[i];
 	i = gnl_read(fd, tmpl, tmpbuf, line);
 	i = (tmpl[0] != '\0') ? 1 : i;
+	ft_printf("%s\n", *line);
 	return (i);
 }
