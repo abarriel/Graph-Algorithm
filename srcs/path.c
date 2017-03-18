@@ -6,34 +6,27 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 02:15:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/18 02:51:28 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/18 22:59:33 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int		verif_no_path(t_room *r)
+int		verif_no_path(t_tube *t)
 {
-	int		i;
-	t_tube	*tube;
-
-	i = 0;
-	while (r->tube->prev)
-		r->tube = r->tube->prev;
-	tube = r->tube;
-	while (r->tube)
+	t_tube *tmp;
+	tmp = t;
+	while (t)
 	{
-		if (r->tube->room->by != 4 && r->tube->room->poids != 2)
-			i++;
-		r->tube = r->tube->next;
+		if (t->room->poids == 0 || t->room->poids == 1)
+			break;
+		ft_printf("{GRE}%s %d\n",t->room->name, t->room->poids);
+		t = t->next;
 	}
-	if (i > 0)
-	{
-		r->tube = tube;
+	if(!t)
 		return (1);
-	}
-	else
-		return (0);
+	t = tmp;
+	return 0;
 }
 
 void	save_path_(t_room **r, t_path **p, int size)
@@ -47,9 +40,9 @@ void	save_path_(t_room **r, t_path **p, int size)
 			(*r)->tube = (*r)->tube->next;
 		if ((*r)->by != 4 && (*r)->tube->room->poids == 1 && (*r)->start != 1)
 		{
-			ft_printf("{RED}[%s]",(*r)->name );
 			add_back_path(p, (*r), size);
 			(*r)->by = 4;
+			(*r)->poids = 2;
 			(*r) = (*r)->tube->room;
 			size++;
 		}
@@ -68,7 +61,7 @@ t_path	*save_path(t_room *r, int *i)
 	path = NULL;
 	while(r && r->start != 1)
 		r = r->next;
-	if (!r->tube)
+	if (!r->tube || verif_no_path(r->tube))
 	{
 		(*i)++;
 		return (path);

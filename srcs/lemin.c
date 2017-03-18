@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:32:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 07:50:51 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/18 23:32:25 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,7 @@ int		main(int ac, char **av)
 	if (ac > 1)
 		bonus_lemin(&bc, &bp, av);
 	parser(bc, bp);
+	// while(1)
+	// 	;
 	return (0);
 }

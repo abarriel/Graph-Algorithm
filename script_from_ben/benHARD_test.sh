@@ -8,44 +8,44 @@ INT_MAX="2147483647"
 INT_MIN="-2147483648"
 
 
-lm_test() { 
-	echo -e "\n$YEL"$1"$RES";
-	echo -e $2 | ./lem_in;
+lm_test() {
+	echo "\n$YEL"$1"$RES";
+	echo $2 | ./lem-in;
 }
 
-lm_test_verif() { 
-	echo -e "\n$YEL"$1"$RES";
-	echo -e $2 | ./lem_in;
-	RET=`echo -e $2 | ./lem_in | grep -e "\(L[0-9]+\).*\1"`;
+lm_test_verif() {
+	echo "\n$YEL"$1"$RES";
+	echo $2 | ./lem-in;
+	RET=`echo $2 | ./lem-in | grep -e "\(L[0-9]+\).*\1"`;
 	if [[ $RET ]]; then
-		echo -e "$RED""\nSAME ANT ON THE SAME LINE"
-		echo -e "\nERROR : ""$RET";
+		echo "$RED""\nSAME ANT ON THE SAME LINE"
+		echo "\nERROR : ""$RET";
 	fi
-	RET=`echo -e $2 | ./lem_in | grep -e "-\(.*\) .*\1"`;
+	RET=`echo $2 | ./lem-in | grep -e "-\(.*\) .*\1"`;
 	if [[ $RET ]]; then
-		echo -e "$RED""\nSAME ROOM ON THE SAME LINE"
-		echo -e "\nERROR : ""$RET";
+		echo "$RED""\nSAME ROOM ON THE SAME LINE"
+		echo "\nERROR : ""$RET";
 	fi
 }
 
-lm_test_e() { 
-	echo -e "\n$YEL"$1"$RES";
-	WCL=`echo -e $2 | ./lem_in | grep L | wc -l`;
+lm_test_e() {
+	echo "\n$YEL"$1"$RES";
+	WCL=`echo $2 | ./lem-in | grep L | wc -l`;
 	echo $WCL "steps on" $3 "steps mini."
 }
 
 display_title() {
-	echo -e "\n=============================="
-	echo -e "== $GREEN""  Lem_in parsing tests$RES   =="
-	echo -e "==============================\n"
+	echo "\n=============================="
+	echo "== $GREEN""  Lem_in parsing tests$RES   =="
+	echo "==============================\n"
 }
 
 correction_tests() {
-	echo -e "$GREEN""42 CORRECTION TESTS$RES"
+	echo "$GREEN""42 CORRECTION TESTS$RES"
 
 	lm_test  \
 		"Test 00: no rooms" \
-		"10\n" 
+		"10\n"
 	lm_test  \
 		"Test 01: no ants" \
 		"room1 1 1\n"
@@ -79,11 +79,11 @@ correction_tests() {
 }
 
 ants_parsing() {
-	echo -e "$GREEN""ANTS PARSING$RES"
+	echo "$GREEN""ANTS PARSING$RES"
 
 	lm_test  \
 		"Test 00: 0 ants" \
-		"0" 
+		"0"
 	lm_test  \
 		"Test 01: -10 ants" \
 		"-10"
@@ -93,7 +93,7 @@ ants_parsing() {
 }
 
 rooms_parsing() {
-	echo -e "$GREEN""\nROOMS PARSING$RES"
+	echo "$GREEN""\nROOMS PARSING$RES"
 
 	lm_test  \
 		"Test 00: 10 ants, no room" \
@@ -109,7 +109,7 @@ rooms_parsing() {
 		"10\n#comment\n##start\nroom1 2 3\nLroom2 9 1\n3-4"
 	lm_test  \
 		"Test 04: invalid room format 2 (name x y z)" \
-		"10\n#comment\n##start\nroom1 2 3 4\nLroom2 9 1\n3-4" 
+		"10\n#comment\n##start\nroom1 2 3 4\nLroom2 9 1\n3-4"
 	lm_test  \
 		"Test 05: invalid room format 3 (name x)" \
 		"10\n#comment\n##start\nroom1 4\nLroom2 9 1\n3-4"
@@ -129,7 +129,7 @@ rooms_parsing() {
 }
 
 edges_parsing() {
-	echo -e "$GREEN""\nEDGES PARSING$RES"
+	echo "$GREEN""\nEDGES PARSING$RES"
 
 	lm_test  \
 		"Test 00: no edges" \
@@ -157,7 +157,7 @@ edges_parsing() {
 
 
 efficiency() {
-	echo -e "$GREEN""\nEFFICIENCY$RES"
+	echo "$GREEN""\nEFFICIENCY$RES"
 
 	lm_test_e  \
 		"Test 00: multi-path" \

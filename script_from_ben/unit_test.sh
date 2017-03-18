@@ -6,23 +6,23 @@ RES="\033[0m"
 INT_MAX="2147483647"
 INT_MIN="-2147483648"
 
-lm_test() { 
-	echo -e "\n$YEL"$1"$RES";
-	echo -e $2 | ./lem-in; 
+lm_test() {
+	echo  "\n$YEL"$1"$RES";
+	echo $2 | ./lem-in;
 }
 
 display_title() {
-echo -e "\n=============================="
-echo -e "== $GREEN""  Lem_in parsing tests$RES   =="
-echo -e "==============================\n"
+echo "\n=============================="
+echo  "== $GREEN""  Lem_in parsing tests$RES   =="
+echo  "==============================\n"
 }
 
 correction_tests() {
-echo -e "$GREEN""42 CORRECTION TESTS$RES"
+echo "$GREEN""42 CORRECTION TESTS$RES"
 
 lm_test  \
 	"Test 00: no rooms" \
-	"10" 
+	"10"
 lm_test  \
 	"Test 01: no ants" \
 	"room1 1 1"
@@ -56,11 +56,11 @@ lm_test  \
 }
 
 ants_parsing() {
-echo -e "$GREEN""ANTS PARSING$RES"
+echo "$GREEN""ANTS PARSING$RES"
 
 lm_test  \
 	"Test 00: 0 ants" \
-	"0" 
+	"0"
 lm_test  \
 	"Test 01: -10 ants" \
 	"-10"
@@ -70,7 +70,7 @@ lm_test  \
 }
 
 rooms_parsing() {
-echo -e "$GREEN""\nROOMS PARSING$RES"
+echo  "$GREEN""\nROOMS PARSING$RES"
 
 lm_test  \
 	"Test 00: 10 ants, no room" \
@@ -86,7 +86,7 @@ lm_test  \
 	"10\n#comment\n##start\nroom1 2 3\nLroom2 9 1\n3-4"
 lm_test  \
 	"Test 04: invalid room format 2 (name x y z)" \
-	"10\n#comment\n##start\nroom1 2 3 4\nLroom2 9 1\n3-4" 
+	"10\n#comment\n##start\nroom1 2 3 4\nLroom2 9 1\n3-4"
 lm_test  \
 	"Test 05: invalid room format 3 (name x)" \
 	"10\n#comment\n##start\nroom1 4\nLroom2 9 1\n3-4"
@@ -106,7 +106,7 @@ lm_test  \
 }
 
 edges_parsing() {
-echo -e "$GREEN""\nEDGES PARSING$RES"
+echo "$GREEN""\nEDGES PARSING$RES"
 
 lm_test  \
 	"Test 00: no edges" \

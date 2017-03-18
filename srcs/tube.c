@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 13:27:03 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/06 07:42:49 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/18 23:21:00 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		add_tube(t_room **r, char *line)
 	check_room(tmp);
 	tmp1 = tmp;
 	s = ft_strsplit(line, '-');
-	if (!s[1] || !s[0])
+	if (!s[1] || !s[0] || !(dashi(line)))
 		return (1);
 	else
 	{

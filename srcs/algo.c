@@ -1,43 +1,56 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   algo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/23 16:52:46 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/18 02:37:12 by abarriel         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lemin.h"
-
-void	algo_lem3(t_room **r, t_tube *tmp, t_room *begin, t_room *debut)
+void	algo_lem__(t_room **r1, t_tube **tmp1, t_room *begin, t_room *debut)
 {
-	while((*r)->tube->prev)
-		(*r)->tube = (*r)->tube->prev;
-	while((*r)->tube && (*r)->tube->room->poids != 0)
-			(*r)->tube = (*r)->tube->next;
-	if (!(*r)->tube)
- 	{
- 		(*r)->poids = 2;
- 		verif(begin);
- 		(*r) = debut;
- 	}
+	t_room	*r;
+	t_tube	*tmp;
+
+	r = *r1;
+	tmp = *tmp1;
+	r->tube = r->tube->next;
+	if (!r->tube)
+	{
+		r->poids = 2;
+		r->tube = tmp;
+		verif(begin);
+		r = debut;
+	}
+	*r1 = r;
+	*tmp1 = tmp;
 }
 
-int		algo_lem2(t_room **r, t_tube **tmp, t_room *begin, t_room *debut)
+int		algo_lem_(t_room **r1, t_tube **tmp1, t_room *begin, t_room *debut)
 {
-	if((*r)->tube == NULL)
-			return (0);
-	if ((*r)->tube->room->poids == 0)
+	t_room	*r;
+	t_tube	*tmp;
+
+	r = *r1;
+	tmp = *tmp1;
+	if (r->tube == NULL)
+		return (0);
+	if (r->tube->room->poids == 0)
 	{
-		(*r)->tube->room->poids = 1;
-		(*r) = (*r)->tube->room;
+		r->tube->room->poids = 1;
+		r = r->tube->room;
 	}
 	else
+		algo_lem__(&r, &tmp, begin, debut);
+	*r1 = r;
+	*tmp1 = tmp;
+	return (1);
+}
+
+int		algo_lem___(t_tube **tmp, t_room **r)
+{
+	while ((*tmp))
 	{
-		algo_lem3(r, (*tmp), begin, debut );
+		(*tmp)->room->end = ((*tmp)->room->by == 4) ? 2 : (*tmp)->room->end;
+		if ((*tmp)->room->end == 1)
+		{
+			(*r) = (*tmp)->room;
+			(*r)->poids = 1;
+			return (0);
+		}
+		(*tmp) = (*tmp)->next;
 	}
 	return (1);
 }
@@ -51,11 +64,19 @@ void	algo_lem(t_room *r)
 	begin = r;
 	while (r->start != 1 && r)
 		r = r->next;
-	r->poids = 1 ;
+	r->poids = 2;
 	debut = r;
+	if (!check_stop(r->tube))
+		return ;
 	while (r->end != 1)
 	{
-			if(!algo_lem2(&r,&tmp,begin,debut))
+		if (!verif_no(begin))
+			ft_exit("Invalid Path");
+		tmp = r->tube;
+		if (!algo_lem___(&tmp, &r))
+			return ;
+		tmp = r->tube;
+		if (!algo_lem_(&r, &tmp, begin, debut))
 			return ;
 	}
 	return ;
@@ -73,27 +94,19 @@ void	handles_algo(t_room *r, t_ant *a)
 	if (!(j = multi_path(r, a)))
 		ft_exit("Invalid Path");
 	path = (t_path **)malloc(sizeof(t_path *) * j);
-	// print_room(r);
-	// while (i == 0 && ++b < j)
-	// {
+	while (i == 0 && ++b < j)
+	{
 		algo_lem(r);
-		path[b]= save_path(r, &i);
-		print_path(path[b]);
-		algo_lem(r);
-		// print_room(r);
-		path[b]= save_path(r, &i);
-		print_path(path[b]);
-
-
-		// algo_lem(r);
-	// 	if (!path[b])
-	// 	{
-	// 		j = b;
-	// 		break ;
-	// 	}
-	// 	else if (a->bonus_path == 1)
-	// }
-	// if (!(path[0]))
-	// 	ft_exit("Invalid Path");
-	// handles_path(path, a, j);
+		path[b] = save_path(r, &i);
+		if (!path[b])
+		{
+			j = b;
+			break ;
+		}
+		else if (a->bonus_path == 1)
+			print_path(path[b]);
+	}
+	if (!(path[0]))
+		ft_exit("Invalid Path");
+	handles_path(path, a, j);
 }

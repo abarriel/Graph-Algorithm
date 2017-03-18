@@ -6,7 +6,7 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/17 23:40:17 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/19 00:15:37 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,4 +39,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re libft
+.PHONY: clean fclean re libft all

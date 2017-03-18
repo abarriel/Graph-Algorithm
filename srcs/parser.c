@@ -3,15 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:15 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 07:57:13 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/18 23:32:23 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
+int 	dashi(char *line)
+{
+	int i;
+	int dash;
 
+	dash = 0;
+	i = 0;
+	while (line[i])
+	{
+		if(line[i] == '-')
+			dash++;
+		i++;
+	}
+	if (dash != 1)
+		return (0);
+	return (1);
+}
 void	check_room(t_room *tmp)
 {
 	t_room	*begin_list;
@@ -45,6 +61,7 @@ int		check_stopping(t_room *tmp, char *line, int index)
 	u = 0;
 	while (tmp)
 	{
+		// ft_printf("{GRE}%s - %s\n",line, tmp->name);
 		if (!ft_strncmp(line, tmp->name, index))
 			u++;
 		tmp = tmp->next;
@@ -66,6 +83,7 @@ void	parser(int bp, int bc)
 	r = NULL;
 	get_next_line(0, &line);
 	a = init_ant(line, bp, bc);
+	// free(line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (*line != '#' && (i = if_so_('-', line)))
@@ -79,6 +97,7 @@ void	parser(int bp, int bc)
 			add_back_room(&r, line, 2);
 		else
 			add_back_room(&r, line, 0);
+		// free(line);
 	}
 	(i == 0) ? ft_exit("No tube") : NULL;
 	handles_algo(r, a);
