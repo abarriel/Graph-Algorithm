@@ -14,12 +14,12 @@ INCLUDES += $(addprefix -iquote , $(INC_PATH))
 SRCS = $(shell find . | grep "\.c")
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: makefile $(INCLUDES_FILES) $(NAME)
 
 header:
 	@echo "\033[1;36m[${NAME}]\033[1;32m Compile && Archive\033[0m"
 
-$(NAME): $(OBJS) $(INCLUDES_FILES)
+$(NAME): $(OBJS)
 	@printf "\n\r\e\033[0m\e[K\033[1;31m $@ \033[1;32m - Finished\033[0m\n"
 	@ar rc $(NAME) $(OBJS)
 %.o: %.c

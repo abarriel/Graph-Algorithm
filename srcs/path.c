@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 02:15:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 08:02:30 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/18 02:51:28 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,27 @@ int		verif_no_path(t_room *r)
 		return (0);
 }
 
-void	save_path_(t_room **rp, t_path **pa, int p)
+void	save_path_(t_room **r, t_path **p, int size)
 {
-	t_room	*r;
-	t_path	*path;
+	t_tube *tmp;
 
-	path = *pa;
-	r = *rp;
-	add_back_path(&path, r, p);
-	while (r && r->end != 1)
+	add_back_path(p, (*r), size);
+	while ((*r) && (*r)->end != 1)
 	{
-		while (r->tube && (r->tube->room->by == 4 || r->tube->room->poids != 1))
-			r->tube = r->tube->next;
-		if (r->by != 4 && r->tube->room->poids == 1)
+		while ((*r)->tube && ((*r)->tube->room->by == 4 || (*r)->tube->room->poids != 1))
+			(*r)->tube = (*r)->tube->next;
+		if ((*r)->by != 4 && (*r)->tube->room->poids == 1 && (*r)->start != 1)
 		{
-			if (r->start != 1)
-				add_back_path(&path, r, p);
-			r->by = 4;
-			r = r->tube->room;
+			ft_printf("{RED}[%s]",(*r)->name );
+			add_back_path(p, (*r), size);
+			(*r)->by = 4;
+			(*r) = (*r)->tube->room;
+			size++;
 		}
 		else
-			r = r->tube->room;
-		p++;
+			(*r) = (*r)->tube->room;
 	}
-	add_back_path(&path, r, p);
-	*pa = path;
-	*rp = r;
+	add_back_path(p, (*r), size);
 }
 
 t_path	*save_path(t_room *r, int *i)
@@ -71,7 +66,9 @@ t_path	*save_path(t_room *r, int *i)
 
 	p = 1;
 	path = NULL;
-	if (!r->tube || !verif_no_path(r))
+	while(r && r->start != 1)
+		r = r->next;
+	if (!r->tube)
 	{
 		(*i)++;
 		return (path);

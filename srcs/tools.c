@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 08:18:05 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/13 14:27:32 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/17 21:52:19 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ void	verif(t_room *r)
 {
 	while (r)
 	{
+		if (r->poids == 1)
+			r->poids = 0;
 		if (r->poids == 1 && r->by != 4)
 			r->poids = 0;
-		if (r->by == 4)
-			r->poids = 2;
+		// if (r->by == 4)
+		// 	r->poids = 2;
 		r = r->next;
 	}
 }
