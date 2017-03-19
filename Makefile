@@ -6,7 +6,7 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/19 00:15:37 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/19 05:52:25 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,14 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ./includes/lemin.h
 
-CFLAGS	=  -Wall -Wextra -I./includes/ -Ilibft/includes/
+CFLAGS	=  -Wall -Wextra -Werror -I./includes/ -Ilibft/includes/
 
 all: makefile libft $(NAME)
 
 libft:
 	@make -C libft
 
-$(NAME): $(OBJ) $(INCLUDES)
+$(NAME): libft $(OBJ) $(INCLUDES)
 	@gcc $(OBJ) -o $(NAME)  -Llibft -lft
 	@echo "$^"
 

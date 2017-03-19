@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/19 05:41:54 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/19 05:53:01 by abarriel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-static char			*strjoin(char *new, char *buff)
+static char			*str_join(char *new, char *buff)
 {
 	char			*tmp;
 
@@ -61,21 +73,19 @@ int					get_next_line(const int fd, char **line)
 		new = ft_strnew(1);
 	if (BUFF_SIZE < 0 || !line || fd < 0)
 		return (-1);
-	ret = 2;
 	while (!(ft_strchr(new, '\n')))
 	{
-		ret = read(fd, buff, BUFF_SIZE);
-		if (ret == -1)
+		if ((ret = read(fd, buff, BUFF_SIZE)) == -1)
 			return (-1);
 		buff[ret] = '\0';
-		new = strjoin(new, buff);
-		if (ret == 0 && *new == '\0')
+		new = str_join(new, buff);
+		if (*new != '\0')
+			break ;
+		else
 		{
 			ft_putendl(new);
 			return (0);
 		}
-		if (ret == 0)
-			break ;
 	}
 	*line = ft_stock_the_new_line(new);
 	new = ft_clean_new(new);

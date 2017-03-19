@@ -6,13 +6,13 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:15 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:30:30 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:36:46 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int 	dashi(char *line)
+int		dashi(char *line)
 {
 	int i;
 	int dash;
@@ -29,6 +29,7 @@ int 	dashi(char *line)
 		return (0);
 	return (1);
 }
+
 void	check_room(t_room *tmp)
 {
 	t_room	*begin_list;

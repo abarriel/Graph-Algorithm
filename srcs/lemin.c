@@ -6,24 +6,12 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:32:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:28:56 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:58:59 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void 	free_split(char **tab)
-{
-	int i;
-
-	i = 0;
-	while(tab[i])
-	{
-		ft_strdel(&tab[i]);
-		i++;
-	}
-	free(tab);
-}
 int		if_so_(char conv, char *symb)
 {
 	char	*tmp;
@@ -50,6 +38,15 @@ int		if_so_(char conv, char *symb)
 	return (0);
 }
 
+void	init_ant_(t_ant *r, int bc, int bp)
+{
+	r->start = r->ant;
+	r->end = 0;
+	r->dant = 0;
+	r->bonus_color = bc;
+	r->bonus_path = bp;
+}
+
 t_ant	*init_ant(char *name, int bp, int bc)
 {
 	t_ant		*r;
@@ -74,11 +71,7 @@ t_ant	*init_ant(char *name, int bp, int bc)
 		ft_exit("Failed to Malloc");
 	ft_strdel(&name);
 	r->ant = i;
-	r->start = r->ant;
-	r->end = 0;
-	r->dant = 0;
-	r->bonus_color = bc;
-	r->bonus_path = bp;
+	init_ant_(r, bc, bp);
 	return (r);
 }
 

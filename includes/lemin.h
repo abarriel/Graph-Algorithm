@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 04:24:16 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:41:17 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct		s_ant
 	int				bonus_color;
 	int				bonus_path;
 }					t_ant;
-int 				dashi(char *line);
+int					dashi(char *line);
 int					check_stop(t_tube *r);
 int					verif_no(t_room *tmp);
 int					multi_path(t_room *r, t_ant *a);
@@ -79,5 +79,5 @@ void				print_path(t_path *path);
 void				add_back_room(t_room **r, char *name, int index);
 t_ant				*init_ant(char *name, int bp, int bc);
 void				parser(int bp, int bc);
-void 				free_split(char **tab);
+void				free_split(char **tab);
 #endif

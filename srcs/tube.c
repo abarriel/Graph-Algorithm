@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 13:27:03 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:30:05 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:40:28 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,8 @@ int		add_tube(t_room **r, char *line)
 	s = ft_strsplit(line, '-');
 	if (!s[1] || !s[0] || !(dashi(line)))
 		return (1);
-	else
-	{
-		stop = check_link(*r, s[0]);
-		stop += check_link(*r, s[1]);
-	}
+	stop = check_link(*r, s[0]);
+	stop += check_link(*r, s[1]);
 	while (tmp && stop != 1)
 	{
 		if (!ft_strcmp(s[0], tmp->name))

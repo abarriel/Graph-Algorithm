@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 21:11:10 by abarriel          #+#    #+#             */
-/*   Updated: 2016/12/10 16:25:39 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:57:58 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+void				free_split(char **tab);
 int					ft_sdigit(char *c);
 long				ft_atol(const char *str);
 int					ft_atoi_p(char **s);

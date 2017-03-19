@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 02:15:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 03:39:12 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:44:52 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 int		verif_no_path(t_tube *t)
 {
 	t_tube *tmp;
+
 	tmp = t;
 	while (t)
 	{
 		if (t->room->poids == 0 || t->room->poids == 1)
-			break;
+			break ;
 		t = t->next;
 	}
-	if(!t)
+	if (!t)
 		return (1);
 	t = tmp;
-	return 0;
+	return (0);
 }
 
 void	save_path_(t_room **r, t_path **p, int size)
 {
-	t_tube *tmp;
-
 	add_back_path(p, (*r), size);
 	while ((*r) && (*r)->end != 1)
 	{
-		while ((*r)->tube && ((*r)->tube->room->by == 4 || (*r)->tube->room->poids != 1))
+		while ((*r)->tube && ((*r)->tube->room->by == 4 ||
+					(*r)->tube->room->poids != 1))
 			(*r)->tube = (*r)->tube->next;
 		if ((*r)->by != 4 && (*r)->tube->room->poids == 1 && (*r)->start != 1)
 		{
@@ -58,7 +58,7 @@ t_path	*save_path(t_room *r, int *i)
 
 	p = 1;
 	path = NULL;
-	while(r && r->start != 1)
+	while (r && r->start != 1)
 		r = r->next;
 	if (!r->tube || verif_no_path(r->tube))
 	{

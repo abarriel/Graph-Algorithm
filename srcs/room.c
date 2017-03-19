@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:29:37 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:38:40 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int		parse_error_room(int index, char *n)
 	}
 	if (ft_strchr(n + 1, '#') || *n == 'L')
 		ft_exit("Room cant containt -  # L further explication");
-	if (u == 2 && index == 2)
-		ft_exit("More than one end");
-	if (u == 1 && index == 1)
-		ft_exit("More than one start");
+	(u == 2 && index == 2) ? ft_exit("More than one end") : NULL;
+	(u == 1 && index == 1) ? ft_exit("More than one end") : NULL;
 	parse_error_coord(n);
 	u = (index == 2) ? 2 : u;
 	u = (index == 1) ? 1 : u;

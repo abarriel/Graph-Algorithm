@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 08:18:05 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:30:23 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:39:12 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*next_comment(char *name, int *index)
 
 	i = 0;
 	ft_strdel(&name);
-	if (get_next_line(0,&name) != 1)
+	if (get_next_line(0, &name) != 1)
 		ft_exit("Not Start/End Room");
 	while (*name == '#')
 	{
@@ -86,10 +86,10 @@ char	*next_comment(char *name, int *index)
 char	*ft_name_coord(char *name)
 {
 	char	*str;
-	int 	i;
+	int		i;
 
 	i = 0;
-	while(name[i] && name[i] != ' ')
+	while (name[i] && name[i] != ' ')
 		i++;
 	str = ft_strnew(i);
 	str = ft_strncpy(str, name, i);
