@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   room.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 15:55:02 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/13 14:26:50 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:29:37 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	parse_error_coord(char *s)
 		ft_exit("Wrong coord");
 	if ((ft_sdigit(tab[1]) || ft_sdigit(tab[2])))
 		ft_exit("Coord not a good number");
+	free_split(tab);
 }
 
 int		parse_error_room(int index, char *n)
@@ -56,7 +57,10 @@ int		parse_error_room(int index, char *n)
 	i = 0;
 	if_so_('-', n);
 	if (*n == '#')
+	{
+		ft_strdel(&n);
 		return (0);
+	}
 	while (n[i] && n[i] != ' ')
 	{
 		if (n[i] == '-')
@@ -90,8 +94,7 @@ void	check_if(t_room *r, char *name)
 			ft_exit("Same Room");
 		r = r->next;
 	}
-	if (tmp)
-		free(tmp);
+	ft_strdel(&tmp);
 }
 
 void	add_back_room(t_room **r, char *name, int index)

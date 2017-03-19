@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 05:02:47 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/18 22:59:41 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:29:29 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_ants(t_ant *a, int ants, char *name)
 		i = 2;
 	ft_putstr("\e[38;5;");
 	ft_putnbr(i);
-	ft_putstr("m");
+	ft_putchar('m');
 	ft_printf("L%d-%s", ants, name);
 	ft_putstr(RESET);
 	if ((a->end + 1 == a->ant) && !ft_strcmp(name, a->n_end))

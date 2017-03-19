@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 02:15:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/18 22:59:33 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 03:39:12 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		verif_no_path(t_tube *t)
 	{
 		if (t->room->poids == 0 || t->room->poids == 1)
 			break;
-		ft_printf("{GRE}%s %d\n",t->room->name, t->room->poids);
 		t = t->next;
 	}
 	if(!t)

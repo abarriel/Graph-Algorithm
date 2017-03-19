@@ -20,10 +20,10 @@ header:
 	@echo "\033[1;36m[${NAME}]\033[1;32m Compile && Archive\033[0m"
 
 $(NAME): $(OBJS)
-	@printf "\n\r\e\033[0m\e[K\033[1;31m $@ \033[1;32m - Finished\033[0m\n"
+	@printf "\r\e\033[0m\e[K\033[1;31m $@ \033[1;32m - Finished\033[0m\n"
 	@ar rc $(NAME) $(OBJS)
 %.o: %.c
-	@printf "\r\033[1;32m. Compile .\e\033[0m\e[K \033[1;31m$<"
+	@printf "\r\033[1;32m. Compiling .\e\033[0m\e[K \033[1;31m$<"
 	@gcc $(ALL_CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   send.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 03:03:25 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/11 10:15:49 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 04:19:03 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	erase_large_path(t_path **p, t_path **begin, int *max_path)
 		if (i + 1 < *(max_path) && (p[i + 1]->size > (p[0]->size + 1)))
 		{
 			*(max_path) = i + 1;
-			p[i + 1] = NULL;
 			p = begin;
 			return ;
 		}

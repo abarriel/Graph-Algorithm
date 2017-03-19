@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 00:43:54 by abarriel          #+#    #+#             */
-/*   Updated: 2016/12/11 17:05:47 by mheutsch         ###   ########.fr       */
+/*   Updated: 2017/03/19 01:43:52 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 1024
+# define MAX_SIZE_FD 2560
 # include "libft.h"
 # include <fcntl.h>
 

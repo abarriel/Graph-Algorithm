@@ -1,4 +1,5 @@
 #include "lemin.h"
+
 void	algo_lem__(t_room **r1, t_tube **tmp1, t_room *begin, t_room *debut)
 {
 	t_room	*r;

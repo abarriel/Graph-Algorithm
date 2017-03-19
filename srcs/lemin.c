@@ -6,12 +6,24 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:32:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/18 23:32:25 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 05:28:56 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
+void 	free_split(char **tab)
+{
+	int i;
+
+	i = 0;
+	while(tab[i])
+	{
+		ft_strdel(&tab[i]);
+		i++;
+	}
+	free(tab);
+}
 int		if_so_(char conv, char *symb)
 {
 	char	*tmp;
@@ -28,6 +40,7 @@ int		if_so_(char conv, char *symb)
 	}
 	while (tab[i])
 		i++;
+	free_split(tab);
 	while (symb && *symb)
 	{
 		if (conv == *symb)
@@ -45,7 +58,10 @@ t_ant	*init_ant(char *name, int bp, int bc)
 
 	while (ft_strcmp(name, "##start") &&
 			ft_strcmp(name, "##end") && *name == '#')
+	{
+		ft_strdel(&name);
 		get_next_line(0, &name);
+	}
 	while (name[++a])
 	{
 		if (name[a] != '\0' && (name[a] < 48 || name[a] > 57))
@@ -56,6 +72,7 @@ t_ant	*init_ant(char *name, int bp, int bc)
 		ft_exit("Wrong ant's numbers");
 	if (!(r = (t_ant*)malloc(sizeof(t_ant))))
 		ft_exit("Failed to Malloc");
+	ft_strdel(&name);
 	r->ant = i;
 	r->start = r->ant;
 	r->end = 0;
@@ -92,7 +109,5 @@ int		main(int ac, char **av)
 	if (ac > 1)
 		bonus_lemin(&bc, &bp, av);
 	parser(bc, bp);
-	// while(1)
-	// 	;
 	return (0);
 }
