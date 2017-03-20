@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 03:03:25 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 04:19:03 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:55:33 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 	if (max_path > 1)
 		sort_multi_path(p, &max_path);
 	i = -1;
-	while (++i <= max_path)
+	while (++i < max_path)
 		tmp[i] = p[i];
 	i = -1;
 	while (a->end != a->ant)
@@ -108,6 +108,6 @@ void	handles_path(t_path **p, t_ant *a, int max_path)
 		}
 		i = -1;
 		ft_printf("\n");
-		p[i] = tmp[i];
+		p[i + 1] = tmp[i + 1];
 	}
 }

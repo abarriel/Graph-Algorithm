@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 00:36:09 by abarriel          #+#    #+#             */
-/*   Updated: 2017/01/29 23:05:54 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:18:56 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		set_flags_(t_flag *t)
+{
+	t->l = 0;
+	t->ll = 0;
+	t->h = 0;
+	t->hh = 0;
+	t->jz = 0;
+	t->neg = 0;
+	t->plus = 0;
+	t->pre_len = 0;
+	t->champs = 0;
+	t->slen = 0;
+	t->color_nfun = 0;
+}
 
 t_flag		*set_flags(int fd)
 {
@@ -27,16 +42,9 @@ t_flag		*set_flags(int fd)
 	t->left = 0;
 	t->aq = 0;
 	t->sta = 0;
+	t->b_sta = 0;
 	t->preci = 0;
-	t->l = 0;
-	t->ll = 0;
-	t->h = 0;
-	t->neg = 0;
-	t->plus = 0;
-	t->pre_len = 0;
-	t->champs = 0;
-	t->slen = 0;
-	t->color_nfun = 0;
+	set_flags_(t);
 	return (t);
 }
 

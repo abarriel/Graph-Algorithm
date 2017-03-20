@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 	@gcc $(ALL_CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	
+
 	@$(RM) $(OBJS)
 
 fclean: clean

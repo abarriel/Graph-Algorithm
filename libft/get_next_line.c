@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 05:41:54 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:53:01 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 06:19:36 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int					get_next_line(const int fd, char **line)
 	static char		*new;
 
 	if (!new)
-		new = ft_strnew(1);
-	if (BUFF_SIZE < 0 || !line || fd < 0)
+		new = ft_strnew(0);
+	if (!line || fd < 0)
 		return (-1);
 	while (!(ft_strchr(new, '\n')))
 	{
@@ -81,11 +81,9 @@ int					get_next_line(const int fd, char **line)
 		new = str_join(new, buff);
 		if (*new != '\0')
 			break ;
-		else
-		{
-			ft_putendl(new);
-			return (0);
-		}
+		ft_putendl(new);
+		ft_strdel(&new);
+		return (0);
 	}
 	*line = ft_stock_the_new_line(new);
 	new = ft_clean_new(new);

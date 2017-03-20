@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 13:27:03 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:40:28 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:09:28 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		add_tube(t_room **r, char *line)
 			stop = check_tube(tmp1, tmp, s[1]);
 		tmp = tmp->next;
 	}
-	ft_strdel(&line);
 	free_split(s);
+	ft_strdel(&line);
 	return (stop);
 }

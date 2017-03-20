@@ -1,9 +1,6 @@
-100
+1
 ##start
 start 1 3
-#lucaslefdp
-mid 1 2
 ##end
 end 3 5
-start-mid
-mid-end
+start-end

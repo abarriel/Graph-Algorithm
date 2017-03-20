@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/19 01:59:56 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 06:21:58 by abarriel         ###   ########.fr       */
+/*   Created: 2017/03/19 22:42:36 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/20 05:13:53 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ext(const char *message, int i)
+char	*ft_strndup(const char *s, size_t i)
 {
-	if (message != NULL)
-		ft_putendl_fd(message, 2);
-	return (i);
-}
+	char	*d;
 
-void	ft_exit(const char *message)
-{
-	if (message != NULL)
-		ft_putendl_fd(message, 2);
-	exit(0);
+	if (!(d = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	d[i] = '\0';
+	ft_memcpy(d, s, i);
+	return (d);
 }

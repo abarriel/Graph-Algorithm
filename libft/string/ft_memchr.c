@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 01:24:51 by abarriel          #+#    #+#             */
-/*   Updated: 2016/11/11 07:41:48 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 21:19:37 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,22 @@ void	*ft_memchr(const void *src, int c, size_t n)
 		n--;
 	}
 	return (NULL);
+}
+
+int		ft_strrcmp(char *s1, char *s2, size_t n)
+{
+	unsigned char	*d1;
+	unsigned char	*d2;
+
+	d1 = (unsigned char *)s1;
+	d2 = (unsigned char *)s2;
+	while (n)
+	{
+		if (*d1 != *d2)
+			return (*d1 - *d2);
+		++d1;
+		++d2;
+		--n;
+	}
+	return (0);
 }

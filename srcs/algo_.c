@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:27:42 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:58:22 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 05:44:54 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int		verif_no(t_room *tmp)
 		}
 		tmp->tube = tmp->tube->next;
 	}
+	tmp->tube = NULL;
 	return (0);
 }

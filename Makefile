@@ -6,7 +6,7 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/19 05:52:25 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/20 09:24:49 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ libft:
 
 $(NAME): libft $(OBJ) $(INCLUDES)
 	@gcc $(OBJ) -o $(NAME)  -Llibft -lft
-	@echo "$^"
 
 clean:
 	@make clean -C libft

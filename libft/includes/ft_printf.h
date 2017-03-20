@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 16:48:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/01/10 02:10:29 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/19 19:56:53 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define BLUE	"\033[0;34m"
 # define PURPLE	"\033[0;35m"
 # define CYAN	"\033[0;36m"
+# define AZUR	"\e[38;5;6m"
+# define PEACH "\e[38;5;9m"
+# define APPLE	"\e[38;5;10m"
+# define OR	"\e[38;5;94m"
 # define GREY	"\033[0;37m"
 # define RESET	"\033[0;m"
 

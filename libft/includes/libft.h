@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 21:11:10 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:57:58 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:10:10 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+void				print_memory(const void *addr, size_t size);
+char				*ft_strndup(const char *s, size_t i);
+int					ft_strrncmp(const char *s1, const char *s2, size_t n);
+char				*ft_strrcpy(char *s);
+int					ext(const char *message, int i);
 void				free_split(char **tab);
 int					ft_sdigit(char *c);
 long				ft_atol(const char *str);

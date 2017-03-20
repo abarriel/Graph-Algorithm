@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 08:18:05 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:39:12 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 08:45:53 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ char	*ft_name_coord(char *name)
 	i = 0;
 	while (name[i] && name[i] != ' ')
 		i++;
-	str = ft_strnew(i);
-	str = ft_strncpy(str, name, i);
+	str = ft_strndup(name, i);
 	ft_strdel(&name);
 	return (str);
 }

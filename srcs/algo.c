@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 05:34:47 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:34:49 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/20 09:54:38 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	algo_lem(t_room *r)
 		return ;
 	while (r->end != 1)
 	{
-		if (!verif_no(begin))
-			ft_exit("Invalid Path");
+		if (!verif_no(debut))
+			return ;
 		tmp = r->tube;
 		if (!algo_lem___(&tmp, &r))
 			return ;
@@ -104,8 +104,7 @@ void	handles_algo(t_room *r, t_ant *a)
 
 	i = 0;
 	b = -1;
-	if (!(j = multi_path(r, a)))
-		ft_exit("Invalid Path");
+	((j = multi_path(r, a)) != 0) ? NULL : ft_exit("Invalid Path");
 	path = (t_path **)malloc(sizeof(t_path *) * j);
 	while (i == 0 && ++b < j)
 	{
@@ -122,4 +121,5 @@ void	handles_algo(t_room *r, t_ant *a)
 	if (!(path[0]))
 		ft_exit("Invalid Path");
 	handles_path(path, a, j);
+	free(path);
 }
