@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 05:02:56 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:56:05 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ t_room				*init_room(char *name, int index);
 void				print_path(t_path *path);
 void				add_back_room(t_room **r, char *name, int index);
 t_ant				*init_ant(char *name, int bp, int bc);
-void				parser(int bp, int bc);
+void				parser(int bp, int bc, char *line);
 void				free_split(char **tab);
 #endif

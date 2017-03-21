@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:15 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 09:54:11 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:57:04 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,31 @@ int		check_stopping(t_room *tmp, char *line, int index)
 	return (0);
 }
 
-void	parser(int bp, int bc)
+void	parser(int bp, int bc, char *line)
 {
-	char	*line;
-	t_room	*r;
-	t_ant	*a;
-	int		i;
+	static t_room		*r = NULL;
+	t_ant				*a;
+	static int			stop = 0;
 
-	i = 0;
-	r = NULL;
 	get_next_line(0, &line);
 	a = init_ant(line, bp, bc);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (*line != '#' && (i = if_so_('-', line)))
+		if (*line != '#' && (if_so_('-', line)))
 		{
+			stop = 1;
 			if ((add_tube(&r, line)))
 				break ;
 		}
-		else if (!ft_strcmp("##start", line))
+		else if (!ft_strcmp("##start", line) && stop == 0)
 			add_back_room(&r, line, 1);
-		else if (!ft_strcmp("##end", line))
+		else if (!ft_strcmp("##end", line) && stop == 0)
 			add_back_room(&r, line, 2);
-		else
+		else if (stop == 0)
 			add_back_room(&r, line, 0);
+		else if (*line != '#')
+			break ;
 	}
-	(i == 0) ? ft_exit("No tube") : NULL;
+	(stop == 0) ? ft_exit("No tube") : NULL;
 	handles_algo(r, a);
 }

@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 05:02:47 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 09:13:09 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:32:11 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_path(t_path *path)
 {
 	if (!path)
 		return ;
+	ft_putchar('\n');
 	while (path)
 	{
 		ft_printf("%s", path->name);

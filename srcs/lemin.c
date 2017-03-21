@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:32:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 09:11:07 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 23:56:45 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,15 @@ void	bonus_lemin(int *bc, int *bp, char **ac)
 
 int		main(int ac, char **av)
 {
-	int	bc;
-	int	bp;
+	int		bc;
+	char	*line;
+	int		bp;
 
 	bc = 0;
 	bp = 0;
+	line = NULL;
 	if (ac > 1)
 		bonus_lemin(&bc, &bp, av);
-	parser(bc, bp);
+	parser(bc, bp, line);
 	return (0);
 }
