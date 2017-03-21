@@ -3,7 +3,7 @@
 room0 0 1
 ##end
 room1 4 5
-room2 6 7 
+room2 6 7
 room3 8 9
 room4 0 1
 room5 9 2
@@ -12,3 +12,9 @@ room1-room2
 room2-room1
 room4-room5
 roomroom-room0
+roomroom-room0
+roomroom-room0
+roomroom-room0
+roomroom-room0
+roomroom-room0
+ro---om0-roo=m11
