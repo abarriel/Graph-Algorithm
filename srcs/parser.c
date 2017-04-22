@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/19 11:33:15 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/22 00:20:20 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/22 17:10:34 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	parser(int bp, int bc, char *line)
 	t_ant				*a;
 	static int			stop = 0;
 
-	(get_next_line(0, &line)) ? NULL : ft_exit("Empty");
+	(get_next_line(0, &line) == 1) ? NULL : ft_exit("Empty");
 	a = init_ant(line, bp, bc);
 	while (get_next_line(0, &line) > 0)
 	{
